@@ -1,0 +1,132 @@
+﻿@using TrungTamAnhNgu.Models
+@{
+    Teacher teacher = ViewBag.teacher;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/helper.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+</head>
+
+<body class="fix-header fix-sidebar">
+
+    
+    <div id="main-wrapper">
+        @Html.Partial("~/Views/Shared/_Header.cshtml")
+        @Html.Partial("~/Views/Shared/_AdminLeftBar.cshtml")
+
+        <div class="page-wrapper">
+
+            <div class="container-fluid">
+                <!-- Start Page Content -->
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-validation">
+                                    <form class="form-valide" action="/Admin/UpdateTeacherHandler" method="post">
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Username <span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" name="username" value="@teacher.UserName" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Password <span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" name="password" value="@teacher.Password">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Tên <span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" name="name" value="@teacher.Name">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Số cmnd <span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" name="id" value="@teacher.Id">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Ngày sinh <span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input type="date" class="form-control" name="dayOfBirth" @DateTime.ParseExact(teacher.DayOfBirth.ToString().Substring(0,9),"yyyy-MM-dd",null)>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Nam<span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                @if ((Boolean)teacher.Gender)
+                                                {
+                                                    <input type="checkbox" class="form-control" name="gender" value="1" checked>
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" class="form-control" name="gender" value="1">
+                                                }
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Email <span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" name="email" value="@teacher.Email">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Số điện thoại <span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" name="phone" value="@teacher.PhoneNumber">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row">
+                                            <div class="col-lg-8 ml-auto">
+                                                <button type="submit" class="btn btn-primary">Thay đổi</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End PAge Content -->
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- script -->
+    <script src="~/js/lib/jquery/jquery.min.js"></script>
+    <script src="~/js/lib/bootstrap/js/popper.min.js"></script>
+    <script src="~/js/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.slimscroll.js"></script>
+    <script src="~/js/sidebarmenu.js"></script>
+    <script src="~/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="~/js/custom.min.js"></script>
+
+
+    <script src="~/js/lib/form-validation/AddTeacher.validate.js"></script>
+
+</body>
+
+</html>
+

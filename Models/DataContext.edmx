@@ -1,0 +1,733 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TrungTamAnhNguModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="50" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="DayOfBirth" Type="date" />
+          <Property Name="Gender" Type="bit" />
+          <Property Name="PhoneNumber" Type="nchar" MaxLength="50" />
+          <Property Name="Email" Type="nchar" MaxLength="50" />
+          <Property Name="Id" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="TeacherUsername" Type="nchar" MaxLength="50" />
+          <Property Name="Charge" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Homework">
+          <Key>
+            <PropertyRef Name="StudentUsername" />
+            <PropertyRef Name="ClassId" />
+            <PropertyRef Name="ClassNumber" />
+          </Key>
+          <Property Name="StudentUsername" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClassId" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClassNumber" Type="int" Nullable="false" />
+          <Property Name="HomeworkContent" Type="nchar" MaxLength="50" />
+          <Property Name="Score" Type="int" />
+        </EntityType>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="ClassId" />
+            <PropertyRef Name="ClassNumber" />
+          </Key>
+          <Property Name="ClassId" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClassNumber" Type="int" Nullable="false" />
+          <Property Name="Day" Type="date" />
+          <Property Name="Location" Type="nchar" MaxLength="50" />
+          <Property Name="LessionContent" Type="nchar" MaxLength="50" />
+          <Property Name="HomeworkQuestion" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MadeMistake">
+          <Key>
+            <PropertyRef Name="MistakeId" />
+            <PropertyRef Name="StudentUsername" />
+            <PropertyRef Name="ClassId" />
+            <PropertyRef Name="ClassNumber" />
+          </Key>
+          <Property Name="MistakeId" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudentUsername" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClassId" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClassNumber" Type="int" Nullable="false" />
+          <Property Name="IsPay" Type="bit" />
+        </EntityType>
+        <EntityType Name="Mistake">
+          <Key>
+            <PropertyRef Name="MistakeId" />
+          </Key>
+          <Property Name="MistakeId" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="50" />
+          <Property Name="Charge" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Register">
+          <Key>
+            <PropertyRef Name="ClassId" />
+            <PropertyRef Name="StudentUsername" />
+          </Key>
+          <Property Name="ClassId" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="StudentUsername" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsPay" Type="bit" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="50" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="DayOfBirth" Type="date" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nchar" MaxLength="50" />
+          <Property Name="Email" Type="nchar" MaxLength="50" />
+          <Property Name="Id" Type="nchar" MaxLength="50" />
+          <Property Name="School" Type="nchar" MaxLength="50" />
+          <Property Name="Grade" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="50" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="DayOfBirth" Type="date" />
+          <Property Name="Gender" Type="bit" />
+          <Property Name="PhoneNumber" Type="nchar" MaxLength="50" />
+          <Property Name="Email" Type="nchar" MaxLength="50" />
+          <Property Name="Id" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Class_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="TeacherUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Homeword_Lesson">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+          <End Role="Homework" Type="Self.Homework" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="ClassNumber" />
+            </Principal>
+            <Dependent Role="Homework">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="ClassNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Homework_Register">
+          <End Role="Register" Type="Self.Register" Multiplicity="1" />
+          <End Role="Homework" Type="Self.Homework" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Register">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="StudentUsername" />
+            </Principal>
+            <Dependent Role="Homework">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="StudentUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lesson_Class">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MadeMistake_Lesson">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+          <End Role="MadeMistake" Type="Self.MadeMistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="ClassNumber" />
+            </Principal>
+            <Dependent Role="MadeMistake">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="ClassNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MadeMistake_Mistake">
+          <End Role="Mistake" Type="Self.Mistake" Multiplicity="1" />
+          <End Role="MadeMistake" Type="Self.MadeMistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mistake">
+              <PropertyRef Name="MistakeId" />
+            </Principal>
+            <Dependent Role="MadeMistake">
+              <PropertyRef Name="MistakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MadeMistake_Register">
+          <End Role="Register" Type="Self.Register" Multiplicity="1" />
+          <End Role="MadeMistake" Type="Self.MadeMistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Register">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="StudentUsername" />
+            </Principal>
+            <Dependent Role="MadeMistake">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="StudentUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Register_Class">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Register" Type="Self.Register" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Register">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Register_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Register" Type="Self.Register" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="Register">
+              <PropertyRef Name="StudentUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TrungTamAnhNguModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Homework" EntityType="Self.Homework" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lesson" EntityType="Self.Lesson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MadeMistake" EntityType="Self.MadeMistake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mistake" EntityType="Self.Mistake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Register" EntityType="Self.Register" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Class_Teacher" Association="Self.FK_Class_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Class" EntitySet="Class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Homeword_Lesson" Association="Self.FK_Homeword_Lesson">
+            <End Role="Lesson" EntitySet="Lesson" />
+            <End Role="Homework" EntitySet="Homework" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Homework_Register" Association="Self.FK_Homework_Register">
+            <End Role="Register" EntitySet="Register" />
+            <End Role="Homework" EntitySet="Homework" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lesson_Class" Association="Self.FK_Lesson_Class">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="Lesson" EntitySet="Lesson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MadeMistake_Lesson" Association="Self.FK_MadeMistake_Lesson">
+            <End Role="Lesson" EntitySet="Lesson" />
+            <End Role="MadeMistake" EntitySet="MadeMistake" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MadeMistake_Mistake" Association="Self.FK_MadeMistake_Mistake">
+            <End Role="Mistake" EntitySet="Mistake" />
+            <End Role="MadeMistake" EntitySet="MadeMistake" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MadeMistake_Register" Association="Self.FK_MadeMistake_Register">
+            <End Role="Register" EntitySet="Register" />
+            <End Role="MadeMistake" EntitySet="MadeMistake" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Register_Class" Association="Self.FK_Register_Class">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="Register" EntitySet="Register" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Register_Student" Association="Self.FK_Register_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Register" EntitySet="Register" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TrungTamAnhNguModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="DayOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="Boolean" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="TeacherUsername" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Charge" Type="Int64" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Class_Teacher" FromRole="Class" ToRole="Teacher" />
+          <NavigationProperty Name="Lessons" Relationship="Self.FK_Lesson_Class" FromRole="Class" ToRole="Lesson" />
+          <NavigationProperty Name="Registers" Relationship="Self.FK_Register_Class" FromRole="Class" ToRole="Register" />
+        </EntityType>
+        <EntityType Name="Homework">
+          <Key>
+            <PropertyRef Name="StudentUsername" />
+            <PropertyRef Name="ClassId" />
+            <PropertyRef Name="ClassNumber" />
+          </Key>
+          <Property Name="StudentUsername" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ClassId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ClassNumber" Type="Int32" Nullable="false" />
+          <Property Name="HomeworkContent" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Score" Type="Int32" />
+          <NavigationProperty Name="Lesson" Relationship="Self.FK_Homeword_Lesson" FromRole="Homework" ToRole="Lesson" />
+          <NavigationProperty Name="Register" Relationship="Self.FK_Homework_Register" FromRole="Homework" ToRole="Register" />
+        </EntityType>
+        <EntityType Name="Lesson">
+          <Key>
+            <PropertyRef Name="ClassId" />
+            <PropertyRef Name="ClassNumber" />
+          </Key>
+          <Property Name="ClassId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ClassNumber" Type="Int32" Nullable="false" />
+          <Property Name="Day" Type="DateTime" Precision="0" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="LessionContent" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="HomeworkQuestion" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Class" Relationship="Self.FK_Lesson_Class" FromRole="Lesson" ToRole="Class" />
+          <NavigationProperty Name="Homework" Relationship="Self.FK_Homeword_Lesson" FromRole="Lesson" ToRole="Homework" />
+          <NavigationProperty Name="MadeMistakes" Relationship="Self.FK_MadeMistake_Lesson" FromRole="Lesson" ToRole="MadeMistake" />
+        </EntityType>
+        <EntityType Name="MadeMistake">
+          <Key>
+            <PropertyRef Name="MistakeId" />
+            <PropertyRef Name="StudentUsername" />
+            <PropertyRef Name="ClassId" />
+            <PropertyRef Name="ClassNumber" />
+          </Key>
+          <Property Name="MistakeId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="StudentUsername" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ClassId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ClassNumber" Type="Int32" Nullable="false" />
+          <Property Name="IsPay" Type="Boolean" />
+          <NavigationProperty Name="Lesson" Relationship="Self.FK_MadeMistake_Lesson" FromRole="MadeMistake" ToRole="Lesson" />
+          <NavigationProperty Name="Mistake" Relationship="Self.FK_MadeMistake_Mistake" FromRole="MadeMistake" ToRole="Mistake" />
+          <NavigationProperty Name="Register" Relationship="Self.FK_MadeMistake_Register" FromRole="MadeMistake" ToRole="Register" />
+        </EntityType>
+        <EntityType Name="Mistake">
+          <Key>
+            <PropertyRef Name="MistakeId" />
+          </Key>
+          <Property Name="MistakeId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Charge" Type="Int64" />
+          <NavigationProperty Name="MadeMistakes" Relationship="Self.FK_MadeMistake_Mistake" FromRole="Mistake" ToRole="MadeMistake" />
+        </EntityType>
+        <EntityType Name="Register">
+          <Key>
+            <PropertyRef Name="ClassId" />
+            <PropertyRef Name="StudentUsername" />
+          </Key>
+          <Property Name="ClassId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="StudentUsername" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IsPay" Type="Boolean" />
+          <NavigationProperty Name="Class" Relationship="Self.FK_Register_Class" FromRole="Register" ToRole="Class" />
+          <NavigationProperty Name="Homework" Relationship="Self.FK_Homework_Register" FromRole="Register" ToRole="Homework" />
+          <NavigationProperty Name="MadeMistakes" Relationship="Self.FK_MadeMistake_Register" FromRole="Register" ToRole="MadeMistake" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Register_Student" FromRole="Register" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="DayOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="School" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Grade" Type="Int32" />
+          <NavigationProperty Name="Registers" Relationship="Self.FK_Register_Student" FromRole="Student" ToRole="Register" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="DayOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="Boolean" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Classes" Relationship="Self.FK_Class_Teacher" FromRole="Teacher" ToRole="Class" />
+        </EntityType>
+        <Association Name="FK_Class_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="TeacherUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lesson_Class">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lesson">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Register_Class">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Register" Type="Self.Register" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Register">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Homeword_Lesson">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+          <End Role="Homework" Type="Self.Homework" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="ClassNumber" />
+            </Principal>
+            <Dependent Role="Homework">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="ClassNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Homework_Register">
+          <End Role="Register" Type="Self.Register" Multiplicity="1" />
+          <End Role="Homework" Type="Self.Homework" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Register">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="StudentUsername" />
+            </Principal>
+            <Dependent Role="Homework">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="StudentUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MadeMistake_Lesson">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+          <End Role="MadeMistake" Type="Self.MadeMistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="ClassNumber" />
+            </Principal>
+            <Dependent Role="MadeMistake">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="ClassNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MadeMistake_Mistake">
+          <End Role="Mistake" Type="Self.Mistake" Multiplicity="1" />
+          <End Role="MadeMistake" Type="Self.MadeMistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mistake">
+              <PropertyRef Name="MistakeId" />
+            </Principal>
+            <Dependent Role="MadeMistake">
+              <PropertyRef Name="MistakeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MadeMistake_Register">
+          <End Role="Register" Type="Self.Register" Multiplicity="1" />
+          <End Role="MadeMistake" Type="Self.MadeMistake" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Register">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="StudentUsername" />
+            </Principal>
+            <Dependent Role="MadeMistake">
+              <PropertyRef Name="ClassId" />
+              <PropertyRef Name="StudentUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Register_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Register" Type="Self.Register" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="UserName" />
+            </Principal>
+            <Dependent Role="Register">
+              <PropertyRef Name="StudentUsername" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TrungTamAnhNguEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Classes" EntityType="Self.Class" />
+          <EntitySet Name="Homework" EntityType="Self.Homework" />
+          <EntitySet Name="Lessons" EntityType="Self.Lesson" />
+          <EntitySet Name="MadeMistakes" EntityType="Self.MadeMistake" />
+          <EntitySet Name="Mistakes" EntityType="Self.Mistake" />
+          <EntitySet Name="Registers" EntityType="Self.Register" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+          <AssociationSet Name="FK_Class_Teacher" Association="Self.FK_Class_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="Class" EntitySet="Classes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lesson_Class" Association="Self.FK_Lesson_Class">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Lesson" EntitySet="Lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Register_Class" Association="Self.FK_Register_Class">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="Register" EntitySet="Registers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Homeword_Lesson" Association="Self.FK_Homeword_Lesson">
+            <End Role="Lesson" EntitySet="Lessons" />
+            <End Role="Homework" EntitySet="Homework" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Homework_Register" Association="Self.FK_Homework_Register">
+            <End Role="Register" EntitySet="Registers" />
+            <End Role="Homework" EntitySet="Homework" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MadeMistake_Lesson" Association="Self.FK_MadeMistake_Lesson">
+            <End Role="Lesson" EntitySet="Lessons" />
+            <End Role="MadeMistake" EntitySet="MadeMistakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MadeMistake_Mistake" Association="Self.FK_MadeMistake_Mistake">
+            <End Role="Mistake" EntitySet="Mistakes" />
+            <End Role="MadeMistake" EntitySet="MadeMistakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MadeMistake_Register" Association="Self.FK_MadeMistake_Register">
+            <End Role="Register" EntitySet="Registers" />
+            <End Role="MadeMistake" EntitySet="MadeMistakes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Register_Student" Association="Self.FK_Register_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Register" EntitySet="Registers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TrungTamAnhNguModelStoreContainer" CdmEntityContainer="TrungTamAnhNguEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="TrungTamAnhNguModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DayOfBirth" ColumnName="DayOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="TrungTamAnhNguModel.Class">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TeacherUsername" ColumnName="TeacherUsername" />
+                <ScalarProperty Name="Charge" ColumnName="Charge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Homework">
+            <EntityTypeMapping TypeName="TrungTamAnhNguModel.Homework">
+              <MappingFragment StoreEntitySet="Homework">
+                <ScalarProperty Name="StudentUsername" ColumnName="StudentUsername" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="ClassNumber" ColumnName="ClassNumber" />
+                <ScalarProperty Name="HomeworkContent" ColumnName="HomeworkContent" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lessons">
+            <EntityTypeMapping TypeName="TrungTamAnhNguModel.Lesson">
+              <MappingFragment StoreEntitySet="Lesson">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="ClassNumber" ColumnName="ClassNumber" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="LessionContent" ColumnName="LessionContent" />
+                <ScalarProperty Name="HomeworkQuestion" ColumnName="HomeworkQuestion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MadeMistakes">
+            <EntityTypeMapping TypeName="TrungTamAnhNguModel.MadeMistake">
+              <MappingFragment StoreEntitySet="MadeMistake">
+                <ScalarProperty Name="MistakeId" ColumnName="MistakeId" />
+                <ScalarProperty Name="StudentUsername" ColumnName="StudentUsername" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="ClassNumber" ColumnName="ClassNumber" />
+                <ScalarProperty Name="IsPay" ColumnName="IsPay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mistakes">
+            <EntityTypeMapping TypeName="TrungTamAnhNguModel.Mistake">
+              <MappingFragment StoreEntitySet="Mistake">
+                <ScalarProperty Name="MistakeId" ColumnName="MistakeId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Charge" ColumnName="Charge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registers">
+            <EntityTypeMapping TypeName="TrungTamAnhNguModel.Register">
+              <MappingFragment StoreEntitySet="Register">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="StudentUsername" ColumnName="StudentUsername" />
+                <ScalarProperty Name="IsPay" ColumnName="IsPay" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="TrungTamAnhNguModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DayOfBirth" ColumnName="DayOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TrungTamAnhNguModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="TrungTamAnhNguModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DayOfBirth" ColumnName="DayOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrungTamAnhNguModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="50" />
+    <Property Name="Name" Type="nchar" MaxLength="50" />
+    <Property Name="DayOfBirth" Type="date" />
+    <Property Name="Gender" Type="bit" />
+    <Property Name="PhoneNumber" Type="nchar" MaxLength="50" />
+    <Property Name="Email" Type="nchar" MaxLength="50" />
+    <Property Name="Id" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="50" />
+    <Property Name="TeacherUsername" Type="nchar" MaxLength="50" />
+    <Property Name="Charge" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Homework">
+    <Key>
+      <PropertyRef Name="StudentUsername" />
+      <PropertyRef Name="ClassId" />
+      <PropertyRef Name="ClassNumber" />
+    </Key>
+    <Property Name="StudentUsername" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="ClassId" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="ClassNumber" Type="int" Nullable="false" />
+    <Property Name="HomeworkContent" Type="nchar" MaxLength="50" />
+    <Property Name="Score" Type="int" />
+  </EntityType>
+  <EntityType Name="Lesson">
+    <Key>
+      <PropertyRef Name="ClassId" />
+      <PropertyRef Name="ClassNumber" />
+    </Key>
+    <Property Name="ClassId" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="ClassNumber" Type="int" Nullable="false" />
+    <Property Name="Day" Type="date" />
+    <Property Name="Location" Type="nchar" MaxLength="50" />
+    <Property Name="LessionContent" Type="nchar" MaxLength="50" />
+    <Property Name="HomeworkQuestion" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MadeMistake">
+    <Key>
+      <PropertyRef Name="MistakeId" />
+      <PropertyRef Name="StudentUsername" />
+      <PropertyRef Name="ClassId" />
+      <PropertyRef Name="ClassNumber" />
+    </Key>
+    <Property Name="MistakeId" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="StudentUsername" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="ClassId" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="ClassNumber" Type="int" Nullable="false" />
+    <Property Name="IsPay" Type="bit" />
+  </EntityType>
+  <EntityType Name="Mistake">
+    <Key>
+      <PropertyRef Name="MistakeId" />
+    </Key>
+    <Property Name="MistakeId" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nchar" MaxLength="50" />
+    <Property Name="Charge" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Register">
+    <Key>
+      <PropertyRef Name="ClassId" />
+      <PropertyRef Name="StudentUsername" />
+    </Key>
+    <Property Name="ClassId" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="StudentUsername" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsPay" Type="bit" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="50" />
+    <Property Name="Name" Type="nchar" MaxLength="50" />
+    <Property Name="DayOfBirth" Type="date" />
+    <Property Name="Gender" Type="bit" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nchar" MaxLength="50" />
+    <Property Name="Email" Type="nchar" MaxLength="50" />
+    <Property Name="Id" Type="nchar" MaxLength="50" />
+    <Property Name="School" Type="nchar" MaxLength="50" />
+    <Property Name="Grade" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="50" />
+    <Property Name="Name" Type="nchar" MaxLength="50" />
+    <Property Name="DayOfBirth" Type="date" />
+    <Property Name="Gender" Type="bit" />
+    <Property Name="PhoneNumber" Type="nchar" MaxLength="50" />
+    <Property Name="Email" Type="nchar" MaxLength="50" />
+    <Property Name="Id" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_Class_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="TeacherUsername" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Homeword_Lesson">
+    <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+    <End Role="Homework" Type="Self.Homework" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lesson">
+        <PropertyRef Name="ClassId" />
+        <PropertyRef Name="ClassNumber" />
+      </Principal>
+      <Dependent Role="Homework">
+        <PropertyRef Name="ClassId" />
+        <PropertyRef Name="ClassNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Homework_Register">
+    <End Role="Register" Type="Self.Register" Multiplicity="1" />
+    <End Role="Homework" Type="Self.Homework" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Register">
+        <PropertyRef Name="ClassId" />
+        <PropertyRef Name="StudentUsername" />
+      </Principal>
+      <Dependent Role="Homework">
+        <PropertyRef Name="ClassId" />
+        <PropertyRef Name="StudentUsername" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Lesson_Class">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Lesson" Type="Self.Lesson" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Lesson">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MadeMistake_Lesson">
+    <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+    <End Role="MadeMistake" Type="Self.MadeMistake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lesson">
+        <PropertyRef Name="ClassId" />
+        <PropertyRef Name="ClassNumber" />
+      </Principal>
+      <Dependent Role="MadeMistake">
+        <PropertyRef Name="ClassId" />
+        <PropertyRef Name="ClassNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MadeMistake_Mistake">
+    <End Role="Mistake" Type="Self.Mistake" Multiplicity="1" />
+    <End Role="MadeMistake" Type="Self.MadeMistake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mistake">
+        <PropertyRef Name="MistakeId" />
+      </Principal>
+      <Dependent Role="MadeMistake">
+        <PropertyRef Name="MistakeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MadeMistake_Register">
+    <End Role="Register" Type="Self.Register" Multiplicity="1" />
+    <End Role="MadeMistake" Type="Self.MadeMistake" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Register">
+        <PropertyRef Name="ClassId" />
+        <PropertyRef Name="StudentUsername" />
+      </Principal>
+      <Dependent Role="MadeMistake">
+        <PropertyRef Name="ClassId" />
+        <PropertyRef Name="StudentUsername" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Register_Class">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Register" Type="Self.Register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Register">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Register_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Register" Type="Self.Register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="UserName" />
+      </Principal>
+      <Dependent Role="Register">
+        <PropertyRef Name="StudentUsername" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TrungTamAnhNguModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Homework" EntityType="Self.Homework" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lesson" EntityType="Self.Lesson" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MadeMistake" EntityType="Self.MadeMistake" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mistake" EntityType="Self.Mistake" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Register" EntityType="Self.Register" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Class_Teacher" Association="Self.FK_Class_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Class" EntitySet="Class" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Homeword_Lesson" Association="Self.FK_Homeword_Lesson">
+      <End Role="Lesson" EntitySet="Lesson" />
+      <End Role="Homework" EntitySet="Homework" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Homework_Register" Association="Self.FK_Homework_Register">
+      <End Role="Register" EntitySet="Register" />
+      <End Role="Homework" EntitySet="Homework" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Lesson_Class" Association="Self.FK_Lesson_Class">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Lesson" EntitySet="Lesson" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MadeMistake_Lesson" Association="Self.FK_MadeMistake_Lesson">
+      <End Role="Lesson" EntitySet="Lesson" />
+      <End Role="MadeMistake" EntitySet="MadeMistake" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MadeMistake_Mistake" Association="Self.FK_MadeMistake_Mistake">
+      <End Role="Mistake" EntitySet="Mistake" />
+      <End Role="MadeMistake" EntitySet="MadeMistake" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MadeMistake_Register" Association="Self.FK_MadeMistake_Register">
+      <End Role="Register" EntitySet="Register" />
+      <End Role="MadeMistake" EntitySet="MadeMistake" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Register_Class" Association="Self.FK_Register_Class">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Register" EntitySet="Register" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Register_Student" Association="Self.FK_Register_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Register" EntitySet="Register" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
