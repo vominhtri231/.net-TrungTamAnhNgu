@@ -1,6 +1,7 @@
 ﻿@using TrungTamAnhNgu.Models
 @{
     List<Teacher> teachers = ViewBag.teachers;
+    Class c = ViewBag.c;
 }
 
 <!DOCTYPE html>
@@ -31,12 +32,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-validation">
-                                    <form class="form-valide" id="formAddClass" action="/Admin/AddClassHandler" onsubmit="return validate()" method="post" enctype='multipart/form-data'  runat="server">
+                                    <form class="form-valide" id="formAddClass" action="/Admin/UpdateClassHandler" onsubmit="return validate()" method="post" enctype='multipart/form-data'  runat="server">
 
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label">Mã lớp <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" name="id">
+                                                <input type="text" class="form-control" name="id" value="@c.Id" readonly>
                                             </div>
                                             <br>
                                             <div class="text-danger" id="idWarning"> </div>
@@ -45,20 +46,28 @@
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label">Tên lớp <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" name="name">
+                                                <input type="text" class="form-control" name="name" value="@c.Name">
                                             </div>
                                             <br>
                                             <div class="text-danger" id="nameWarning"> </div>
-                                        </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label">Mã giáo viên <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
                                                 <select name="teacherUsername">
                                                     @foreach (Teacher teacher in teachers)
-                                                    {
-                                                        <option value="@teacher.UserName">@teacher.UserName - @teacher.Name</option>
-                                                    }
+                {
+                    if (teacher.UserName.Equals(c.TeacherUsername))
+                    {
+                                    <option value="@teacher.UserName" selected="selected">@teacher.UserName - @teacher.Name</option>
+}
+
+else
+{
+                                    <option value="@teacher.UserName">@teacher.UserName - @teacher.Name</option>
+}
+
+}
                                                 </select>
                                             </div>
                                             <br>
@@ -68,25 +77,18 @@
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label">Học phí <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" name="charge">
+                                                <input type="text" class="form-control" name="charge" value="@c.Charge">
                                             </div>
                                             <br>
                                             <div class="text-danger" id="chargeWarning"> </div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label">Danh sách học viên </label>
-                                            <div class="col-lg-6">
-                                                <input type="file" class="form-control" name="studentList" accept=".xlsx, .xls" >
-                                            </div>  
-                                        </div>
-
+                                       
 
                                         <div class="form-group row">
                                             <div class="col-lg-8 ml-auto">
-                                                <button type="submit" class="btn btn-primary">Thêm</button>
+                                                <button type="submit" class="btn btn-primary">Cập nhật</button>
                                             </div>
-
                                         </div>
                                     </form>
                                 </div>
@@ -117,4 +119,5 @@
 </body>
 
 </html>
+
 

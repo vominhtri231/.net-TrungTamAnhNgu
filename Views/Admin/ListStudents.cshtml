@@ -1,6 +1,6 @@
 ﻿@using TrungTamAnhNgu.Models
 @{
-    List<Class>classes = ViewBag.Classes;
+    List<Student> students = ViewBag.students;
 }
 
 <!DOCTYPE html>
@@ -33,35 +33,42 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Danh sách các lớp học</h4>
-                                <h5><a href="/Admin/AddClass">Thêm lớp học</a></h5>
+                                <h4 class="card-title">Danh sách các học viên</h4>
+                                <h5><a href="/Admin/AddStudent">Thêm học viên</a></h5>
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Mã</th>
+                                                <th>Mã tên</th>
+                                                <th>CMND</th>
                                                 <th>Tên</th>
-                                                <th>Giáo viên</th>
-                                                <th>Học phí</th>
+                                                <th>Ngày sinh</th>
+                                                <th>Email</th>
+                                                <th>SĐT</th>
+                                                <th>Trường</th>
+                                                <th>Năm</th>
                                                 <th>Chức năng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (Class c in classes)
+                                            @foreach (Student student in students)
                                             {
 
-                                            <tr>
-                                                <td>@c.Id</td>
-                                                <td>@c.Name</td>
-                                                <td>@c.Teacher.Name</td>
-                                                <td>@c.Charge</td>
-                                                <td>
-                                                    <a href="/Admin/DeleteClass?id=@c.Id">Xóa</a>
-                                                    -
-                                                    <a href="/Admin/UpdateClass?id=@c.Id">Cập nhật</a>
-                                                    
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td>@student.UserName</td>
+                                                    <td>@student.Id</td>
+                                                    <td>@student.Name</td>
+                                                    <td>@student.DayOfBirth</td>
+                                                    <td>@student.Email</td>
+                                                    <td>@student.PhoneNumber</td>
+                                                    <td>@student.School</td>
+                                                    <td>@student.Grade</td>
+                                                    <td>
+                                                        <a href="/Admin/DeleteStudent?username=@student.UserName">Xóa</a>
+                                                        -
+                                                        <a href="/Admin/UpdateStudent?username=@student.UserName">Cập nhật</a>
+                                                    </td>
+                                                </tr>
 
                                             }
 

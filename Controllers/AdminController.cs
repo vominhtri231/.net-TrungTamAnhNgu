@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,12 +11,25 @@ namespace TrungTamAnhNgu.Controllers
 {
     public class AdminController : Controller
     {
-
         public ActionResult Index()
         {
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            if (HttpContext.Request.Cookies["login"] != null)
+            {
+                HttpCookie cookie = new HttpCookie("login");
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                Response.SetCookie(cookie);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
+        #region teacher actions
         public ActionResult ListTeachers()
         {
             TeacherModel model = new TeacherModel();
@@ -74,7 +89,11 @@ namespace TrungTamAnhNgu.Controllers
             model.Update(teacher);
             return RedirectToAction("ListTeachers");
         }
+        #endregion
 
+
+
+        #region class actions
         public ActionResult ListClasses()
         {
             ClassModel model = new ClassModel();
@@ -85,7 +104,7 @@ namespace TrungTamAnhNgu.Controllers
         public ActionResult AddClass()
         {
             TeacherModel modelTeacher = new TeacherModel();
-            ViewBag.TeacherUsername = modelTeacher.GetUsernames();
+            ViewBag.teachers = modelTeacher.GetListTeacher();
             return View();
         }
 
@@ -100,20 +119,124 @@ namespace TrungTamAnhNgu.Controllers
                 Charge=Convert.ToInt32(form["charge"])
             };
             model.Add(c);
+            if (Request.Files["studentList"].ContentLength > 0)
+            {
+                DataSet ds = HandleExel();
+                model.ReadExel(c.Id,ds);
+            }
             return RedirectToAction("ListClasses");
         }
 
-        public ActionResult Logout()
+        public ActionResult DeleteClass(string id)
         {
-            if (HttpContext.Request.Cookies["login"] != null)
-            {
-                HttpCookie cookie = new HttpCookie("login");
-                cookie.Expires = DateTime.Now.AddDays(-1);
-                Response.SetCookie(cookie);
-            }
-            return RedirectToAction("Index", "Home");
+            ClassModel model = new ClassModel();
+            model.Delete(id);
+            return RedirectToAction("ListClasses");
         }
 
-        
+        public ActionResult UpdateClass(string id)
+        {
+            TeacherModel modelTeacher = new TeacherModel();
+            ViewBag.teachers = modelTeacher.GetListTeacher();
+            ClassModel model = new ClassModel();
+            ViewBag.c = model.GetClass(id);
+            return View();
+        }
+
+        public ActionResult UpdateClassHandler(FormCollection form)
+        {
+            ClassModel model = new ClassModel(); 
+            Class c = new Class()
+            {
+                Id = form["id"],
+                Name = form["name"],
+                TeacherUsername = form["teacherUsername"],
+                Charge = Convert.ToInt32(form["charge"])
+            };
+            model.Update(c);
+            return RedirectToAction("ListClasses");
+        }
+
+        private DataSet HandleExel()
+        {
+            string fileLocation = Server.MapPath("~/Content/") + Request.Files["studentList"].FileName;
+            if (System.IO.File.Exists(fileLocation))
+            {
+                System.IO.File.Delete(fileLocation);
+            }
+            Request.Files["studentList"].SaveAs(fileLocation);
+
+            string fileExtension = System.IO.Path.GetExtension(Request.Files["studentList"].FileName);
+            string excelConnectionString;
+            if (fileExtension == ".xls")
+            {
+                excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + fileLocation + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
+            }
+            else 
+            {
+                excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + fileLocation + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+            }
+
+            string query = "Select * from [students$]";
+            DataSet ds = new DataSet();
+            using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, excelConnectionString))
+            {
+                dataAdapter.Fill(ds);
+            }
+            return ds;
+        }
+        #endregion
+
+
+        #region student actions
+
+        public ActionResult ListStudents()
+        {
+            StudentModel studentModel = new StudentModel();
+            ViewBag.students=studentModel.GetListStudents();
+            return View();
+        }
+
+        public ActionResult AddStudentHandler(FormCollection form)
+        {
+            Student student = new Student()
+            {
+                UserName = form["username"],
+                Password = form["password"],
+                Name = form["name"],
+                Gender = form["gender"] != null,
+                Email = form["email"],
+                PhoneNumber = form["phone"],
+                Id = form["id"],
+                DayOfBirth = DateTime.Parse(form["dayOfBirth"]),
+                School=form["school"],
+                Grade= Convert.ToInt32(form["grade"])
+            };
+            StudentModel studentModel = new StudentModel();
+            studentModel.Add(student);
+            return RedirectToAction("ListStudents");
+        }
+
+        public ActionResult AddStudent()
+        {
+            return View();
+        }
+
+        public ActionResult DeleteStudent(string username)
+        {
+            StudentModel studentModel = new StudentModel();
+            studentModel.Delete(username);
+            return RedirectToAction("ListStudents");
+        }
+
+        public ActionResult UpdateStudent(string username)
+        {
+            StudentModel studentModel = new StudentModel();
+            ViewBag.student = studentModel.GetStudent(username);
+            return View();
+        }
+        #endregion
+
+
     }
 }
