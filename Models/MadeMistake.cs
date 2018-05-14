@@ -18,7 +18,7 @@ namespace TrungTamAnhNgu.Models
         public string StudentUsername { get; set; }
         public string ClassId { get; set; }
         public int ClassNumber { get; set; }
-        public Nullable<bool> IsPay { get; set; }
+        public bool IsPay { get; set; }
     
         public virtual Lesson Lesson { get; set; }
         public virtual Mistake Mistake { get; set; }

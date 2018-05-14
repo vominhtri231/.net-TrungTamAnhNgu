@@ -49,7 +49,8 @@
           <Property Name="Day" Type="date" />
           <Property Name="Location" Type="nchar" MaxLength="50" />
           <Property Name="LessionContent" Type="nchar" MaxLength="50" />
-          <Property Name="HomeworkQuestion" Type="nchar" MaxLength="50" />
+          <Property Name="HomeworkQuestion" Type="nchar" MaxLength="100" />
+          <Property Name="SupportMaterial" Type="nchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="MadeMistake">
           <Key>
@@ -62,7 +63,7 @@
           <Property Name="StudentUsername" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="ClassId" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="ClassNumber" Type="int" Nullable="false" />
-          <Property Name="IsPay" Type="bit" />
+          <Property Name="IsPay" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Mistake">
           <Key>
@@ -79,7 +80,7 @@
           </Key>
           <Property Name="ClassId" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="StudentUsername" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsPay" Type="bit" />
+          <Property Name="IsPay" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -337,7 +338,8 @@
           <Property Name="Day" Type="DateTime" Precision="0" />
           <Property Name="Location" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="LessionContent" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="HomeworkQuestion" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="HomeworkQuestion" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="SupportMaterial" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Class" Relationship="Self.FK_Lesson_Class" FromRole="Lesson" ToRole="Class" />
           <NavigationProperty Name="Homework" Relationship="Self.FK_Homeword_Lesson" FromRole="Lesson" ToRole="Homework" />
           <NavigationProperty Name="MadeMistakes" Relationship="Self.FK_MadeMistake_Lesson" FromRole="Lesson" ToRole="MadeMistake" />
@@ -353,7 +355,7 @@
           <Property Name="StudentUsername" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="ClassId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="ClassNumber" Type="Int32" Nullable="false" />
-          <Property Name="IsPay" Type="Boolean" />
+          <Property Name="IsPay" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Lesson" Relationship="Self.FK_MadeMistake_Lesson" FromRole="MadeMistake" ToRole="Lesson" />
           <NavigationProperty Name="Mistake" Relationship="Self.FK_MadeMistake_Mistake" FromRole="MadeMistake" ToRole="Mistake" />
           <NavigationProperty Name="Register" Relationship="Self.FK_MadeMistake_Register" FromRole="MadeMistake" ToRole="Register" />
@@ -374,7 +376,7 @@
           </Key>
           <Property Name="ClassId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="StudentUsername" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="IsPay" Type="Boolean" />
+          <Property Name="IsPay" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Class" Relationship="Self.FK_Register_Class" FromRole="Register" ToRole="Class" />
           <NavigationProperty Name="Homework" Relationship="Self.FK_Homework_Register" FromRole="Register" ToRole="Homework" />
           <NavigationProperty Name="MadeMistakes" Relationship="Self.FK_MadeMistake_Register" FromRole="Register" ToRole="MadeMistake" />
@@ -634,6 +636,7 @@
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="LessionContent" ColumnName="LessionContent" />
                 <ScalarProperty Name="HomeworkQuestion" ColumnName="HomeworkQuestion" />
+                <ScalarProperty Name="SupportMaterial" ColumnName="SupportMaterial" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

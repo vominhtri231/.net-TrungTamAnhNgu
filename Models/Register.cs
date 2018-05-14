@@ -23,7 +23,7 @@ namespace TrungTamAnhNgu.Models
     
         public string ClassId { get; set; }
         public string StudentUsername { get; set; }
-        public Nullable<bool> IsPay { get; set; }
+        public bool IsPay { get; set; }
     
         public virtual Class Class { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

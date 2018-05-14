@@ -13,6 +13,11 @@ namespace TrungTamAnhNgu.Models
             this.dataContext.SaveChanges();
         }
 
+        public void Remove(Student student)
+        {
+            this.dataContext.Students.Remove(student);
+        }
+
         public Student GetStudent(string username)
         {
             return this.dataContext.Students.Find(new object[] { username });
@@ -25,7 +30,14 @@ namespace TrungTamAnhNgu.Models
 
         public void Delete(string username)
         {
+            RegisterModel registerModel = new RegisterModel();
+            registerModel.DeleteRegisterOfStudent(username);
             Student student = GetStudent(username);
+            Delete(student);
+        }
+
+        public void Delete(Student student)
+        {
             this.dataContext.Students.Remove(student);
             this.dataContext.SaveChanges();
         }

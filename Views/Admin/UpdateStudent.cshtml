@@ -1,6 +1,7 @@
 ﻿@using TrungTamAnhNgu.Models
 @{
     Student student = ViewBag.student;
+    string dayOfBirth = ((DateTime)student.DayOfBirth).ToString("yyyy-MM-dd");
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +70,7 @@
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label">Ngày sinh <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
-                                                <input type="date" class="form-control" name="dayOfBirth">
+                                                <input type="date" class="form-control" name="dayOfBirth" value="@dayOfBirth">
                                             </div>
                                             <br>
                                             <div class="text-danger" id="dateOfBirthWarning"> </div>

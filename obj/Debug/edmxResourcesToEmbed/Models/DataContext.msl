@@ -45,6 +45,7 @@
           <ScalarProperty Name="Location" ColumnName="Location" />
           <ScalarProperty Name="LessionContent" ColumnName="LessionContent" />
           <ScalarProperty Name="HomeworkQuestion" ColumnName="HomeworkQuestion" />
+          <ScalarProperty Name="SupportMaterial" ColumnName="SupportMaterial" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

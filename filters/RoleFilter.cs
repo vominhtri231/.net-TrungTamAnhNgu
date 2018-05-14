@@ -10,6 +10,7 @@ namespace TrungTamAnhNgu.filters
     {
         public void OnAuthorization(AuthorizationContext filterContext)
         {
+            
             char role = ' ';
             if (filterContext.HttpContext.Request.Cookies.AllKeys.Contains("login"))
             {
@@ -36,7 +37,7 @@ namespace TrungTamAnhNgu.filters
             }
             
             string wantedController = (string)filterContext.RouteData.Values["controller"];
-            if (!firstControler.Equals(wantedController))
+            if (!firstControler.Equals(wantedController)&& !wantedController.Equals("Download"))
             {
                 System.Web.Routing.RouteValueDictionary routeValue = new System.Web.Routing.RouteValueDictionary();
                 routeValue.Add("controller", firstControler);

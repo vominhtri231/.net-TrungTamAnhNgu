@@ -148,10 +148,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\RouteHandler.cs" />
+    <Compile Include="App_Start\Download.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="filters\RoleFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -183,15 +187,18 @@
     <Compile Include="Models\Homework.cs">
       <DependentUpon>DataContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HomeworkModel.cs" />
     <Compile Include="Models\Lesson.cs">
       <DependentUpon>DataContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LessonModel.cs" />
     <Compile Include="Models\MadeMistake.cs">
       <DependentUpon>DataContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mistake.cs">
       <DependentUpon>DataContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MistakeModel.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Register.cs">
       <DependentUpon>DataContext.tt</DependentUpon>
@@ -409,6 +416,8 @@
     <Content Include="js\lib\datatables\datatables-init.js" />
     <Content Include="js\lib\datatables\datatables.min.js" />
     <Content Include="js\lib\form-validation\AddClass.validate.js" />
+    <Content Include="js\lib\form-validation\AddLesson.validate.js" />
+    <Content Include="js\lib\form-validation\UpdateLesson.validate.js" />
     <Content Include="js\lib\jquery\jquery.min.js" />
     <Content Include="js\lib\sticky-kit-master\dist\sticky-kit.min.js" />
     <Content Include="js\others\jquery-3.2.1.min.js" />
@@ -419,16 +428,6 @@
     <Content Include="js\others\owl.carousel.min.js" />
     <Content Include="js\scripts.js" />
     <Content Include="js\sidebarmenu.js" />
-    <Content Include="Models\DataContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataContext.edmx</DependentUpon>
-      <LastGenOutput>DataContext.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\DataContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataContext.edmx</DependentUpon>
-      <LastGenOutput>DataContext.cs</LastGenOutput>
-    </Content>
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -501,12 +500,15 @@
     <Content Include="css\less\widget-stat.less" />
     <Content Include="css\others\bootstrap.css.map" />
     <Content Include="js\lib\form-validation\User.validate.js" />
-    <EntityDeploy Include="Models\DataContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DataContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DataContext.edmx.diagram">
+    <Content Include="Models\DataContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DataContext.edmx</DependentUpon>
+      <LastGenOutput>DataContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DataContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataContext.edmx</DependentUpon>
+      <LastGenOutput>DataContext.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -529,14 +531,34 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
+    <Folder Include="Content\HomeworkStudent\" />
+    <Folder Include="Content\Homework\" />
+    <Folder Include="Content\Support\" />
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="Models\DataContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DataContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DataContext.edmx.diagram">
+      <DependentUpon>DataContext.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Admin\UpdateClass.cshtml" />
     <Content Include="Views\Admin\ListStudents.cshtml" />
     <Content Include="Views\Admin\AddStudent.cshtml" />
     <Content Include="Views\Admin\UpdateStudent.cshtml" />
+    <Content Include="Views\Admin\RegisterOfClass.cshtml" />
+    <Content Include="Views\Admin\UpdateRegister.cshtml" />
+    <Content Include="Views\Admin\AddRegister.cshtml" />
+    <Content Include="Views\Admin\ListMistakes.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\ClassInfo.cshtml" />
+    <Content Include="Views\Teacher\AddLesson.cshtml" />
+    <Content Include="Views\Teacher\UpdateLesson.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\RegisterInfo.cshtml" />
+    <Content Include="Views\Student\SubmitHomework.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
