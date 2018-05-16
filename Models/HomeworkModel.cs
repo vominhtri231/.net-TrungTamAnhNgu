@@ -31,6 +31,7 @@ namespace TrungTamAnhNgu.Models
             Homework oldHomework = GetHomework(homework.StudentUsername, homework.ClassId, homework.ClassNumber);
             if (homework.HomeworkContent != null) oldHomework.HomeworkContent = homework.HomeworkContent;
             oldHomework.Score = homework.Score;
+            this.dataContext.SaveChanges();
         }
 
         public Homework GetHomework(string username, string ClassId, int ClassNumber)
@@ -43,10 +44,12 @@ namespace TrungTamAnhNgu.Models
             return this.dataContext.Homework.Where(p => p.StudentUsername.Equals(username) && p.ClassId.Equals(classId)).ToList();
         }
 
-        private List<Homework> GetListHomeworkOfLesson(string classId, int classNumber)
+        public List<Homework> GetListHomeworkOfLesson(string classId, int classNumber)
         {
             return this.dataContext.Homework.Where(p => p.ClassNumber == classNumber && p.ClassId.Equals(classId)).ToList();
         }
+
+       
 
         public void DeleteHomeWorkOfRegister(string username, string classId)
         {

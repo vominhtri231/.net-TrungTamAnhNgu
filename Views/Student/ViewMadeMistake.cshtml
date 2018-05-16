@@ -1,6 +1,8 @@
-﻿@using TrungTamAnhNgu.Models
+﻿
+@using TrungTamAnhNgu.Models
 @{
     Register register = ViewBag.register;
+    List<MadeMistake> madeMistakes = ViewBag.madeMistakes;
 }
 
 <!DOCTYPE html>
@@ -33,62 +35,30 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Danh sách các buổi học của lớp @register.Class.Id -@register.Class.Name</h4>
-                                <h4><a href="/Student/ViewMadeMistake?classId=@register.ClassId">Xem các lỗi của bạn</a></h4>
+                                <h4 class="card-title">Danh sách các vi phạm  của bạn ở lớp @register.Class.Id -@register.Class.Name</h4>
+                                
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>Buổi số </th>
                                                 <th>Ngày học</th>
-                                                <th>Địa điểm</th>
                                                 <th>Nội dung</th>
-                                                <th>Bài về nhà</th>
-                                                <th>Tài liệu</th>
-                                                <th>Chức năng</th>
+                                                <th>Vi phạm</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (Lesson lesson in register.Class.Lessons)
+                                            @foreach (MadeMistake mistake in madeMistakes)
                                             {
 
-                                            <tr>
-                                                <td>@lesson.ClassNumber</td>
-                                                <td>@lesson.Day</td>
-                                                <td>@lesson.Location</td>
-                                                <td>@lesson.LessionContent</td>
-                                                 <td>
-                                                 @if (lesson.HomeworkQuestion != null)
-                                                 {
-                                                     <a target="_blank" href="/Download?file=@lesson.HomeworkQuestion">download</a>
-                                                }
-                                                else 
-                                                {
-                                                    <span>Chưa có </span>
-                                                }
-                                                </td>
-                                                <td>
-                                                 @if (lesson.SupportMaterial != null)
-                                                 {
-                                                    <a target="_blank" href="/Download?file=@lesson.SupportMaterial">download </a>
-                                                }
-                                                else 
-                                                {
-                                                    <span>Chưa có </span>
-                                                }
-                                                </td>
-                                                <td>
-                                                    @if (DateTime.Now <= lesson.DeadLine)
-                                                    { 
-                                                         <a href="/Student/SubmitHomework?classId=@register.ClassId&classNumber=@lesson.ClassNumber">Nộp bài</a>
-                                                    }
-                                                    else
-                                                    {
-                                                         <a href="/Student/ViewScore?classId=@register.ClassId&classNumber=@lesson.ClassNumber">Xem điểm</a>
-                                                    }
-
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td>@mistake.Lesson.ClassNumber</td>
+                                                    <td>@mistake.Lesson.Day</td>
+                                                    <td>@mistake.Lesson.LessionContent</td>
+                                                    <td>@mistake.Mistake.Description</td>
+                                                  
+                                                </tr>
 
                                             }
 

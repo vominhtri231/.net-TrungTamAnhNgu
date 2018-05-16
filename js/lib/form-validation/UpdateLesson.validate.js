@@ -37,8 +37,13 @@ function validate() {
         document.getElementById("dayWarning").innerHTML = "";
     }
 
+    if (formAdd.deadLine.value.trim().length == 0) {
+        res = false;
+        document.getElementById("deadLineWarning").innerHTML = "không được để trống";
+    } else {
+        document.getElementById("deadLineWarning").innerHTML = "";
+    }
    
-
     return res;
 }
 

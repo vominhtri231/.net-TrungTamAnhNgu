@@ -26,6 +26,7 @@ namespace TrungTamAnhNgu.Models
         public Nullable<System.DateTime> Day { get; set; }
         public string Location { get; set; }
         public string LessionContent { get; set; }
+        public Nullable<System.DateTime> DeadLine { get; set; }
         public string HomeworkQuestion { get; set; }
         public string SupportMaterial { get; set; }
     

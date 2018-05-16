@@ -57,7 +57,6 @@
           <ScalarProperty Name="StudentUsername" ColumnName="StudentUsername" />
           <ScalarProperty Name="ClassId" ColumnName="ClassId" />
           <ScalarProperty Name="ClassNumber" ColumnName="ClassNumber" />
-          <ScalarProperty Name="IsPay" ColumnName="IsPay" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -67,6 +66,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ClassId" ColumnName="ClassId" />
           <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -85,6 +85,17 @@
           <ScalarProperty Name="ClassId" ColumnName="ClassId" />
           <ScalarProperty Name="StudentUsername" ColumnName="StudentUsername" />
           <ScalarProperty Name="IsPay" ColumnName="IsPay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Requests">
+      <EntityTypeMapping TypeName="TrungTamAnhNguModel.Request">
+        <MappingFragment StoreEntitySet="Request">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StudentUsername" ColumnName="StudentUsername" />
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

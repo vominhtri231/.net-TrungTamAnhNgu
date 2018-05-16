@@ -18,6 +18,7 @@ namespace TrungTamAnhNgu.Models
         public Class()
         {
             this.Lessons = new HashSet<Lesson>();
+            this.Messages = new HashSet<Message>();
             this.Registers = new HashSet<Register>();
         }
     
@@ -29,6 +30,8 @@ namespace TrungTamAnhNgu.Models
         public virtual Teacher Teacher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lesson> Lessons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Messages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Register> Registers { get; set; }
     }

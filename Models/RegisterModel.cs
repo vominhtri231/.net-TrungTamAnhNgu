@@ -23,6 +23,11 @@ namespace TrungTamAnhNgu.Models
             return this.dataContext.Registers.Where(p => p.StudentUsername.Equals(username)).Select(p => p).ToList();
         }
 
+        public List<Student> GetStudentOfClass(string classId)
+        {
+            return this.dataContext.Registers.Where(p => p.ClassId.Equals(classId)).Select(p => p.Student).ToList();
+        }
+
         public Register GetRegister(string classId, string username)
         {
             return this.dataContext.Registers.Find(new object[] { classId , username });

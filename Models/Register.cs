@@ -19,6 +19,7 @@ namespace TrungTamAnhNgu.Models
         {
             this.Homework = new HashSet<Homework>();
             this.MadeMistakes = new HashSet<MadeMistake>();
+            this.Requests = new HashSet<Request>();
         }
     
         public string ClassId { get; set; }
@@ -31,5 +32,7 @@ namespace TrungTamAnhNgu.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MadeMistake> MadeMistakes { get; set; }
         public virtual Student Student { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Request> Requests { get; set; }
     }
 }

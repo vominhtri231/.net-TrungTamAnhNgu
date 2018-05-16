@@ -1,6 +1,7 @@
 ﻿@using TrungTamAnhNgu.Models
 @{
     List<Register>  registers= ViewBag.registers;
+    List<Message> messages = ViewBag.messages;
 }
 
 <!DOCTYPE html>
@@ -33,6 +34,61 @@
 
                         <div class="card">
                             <div class="card-body">
+                                <h4 class="card-title">Thông báo</h4>
+
+                                <div class="table-responsive m-t-40">
+                                    <table id="myTable"  class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã lớp</th>
+                                                <th>Lớp</th>
+                                                <th>Ngày</th>
+                                                <th>Tin nhắn</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           
+                                            @foreach (Message message in messages)
+                                            {
+                                               
+                                                if (@message.Day.Value.AddDays(3) >= DateTime.Now)
+                                                {
+                                                    <tr >
+                                                        <td class="color-danger">@message.ClassId</td>
+                                                        <td class="color-danger">@message.Class.Name</td>
+                                                        <td class="color-danger">@message.Day</td>
+                                                        <td class="color-danger">@message.Content</td>
+                                                    </tr>
+                                                }
+                                                else
+                                                {
+                                                    <tr>
+                                                        <td>@message.ClassId</td>
+                                                        <td>@message.Class.Name</td>
+                                                        <td>@message.Day</td>
+                                                        <td>@message.Content</td>
+                                                    </tr>
+                                                }
+                                                
+
+                                            }
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card">
+                            <div class="card-body">
                                 <h4 class="card-title">Danh sách các đăng kí học của bạn</h4>
 
                                 <div class="table-responsive m-t-40">
@@ -57,6 +113,8 @@
                                                     <td>@register.IsPay</td>
                                                     <td>
                                                         <a href="/Student/RegisterInfo?classId=@register.ClassId">Xem chi tiết</a>
+                                                        -
+                                                        <a href="/Student/SendRequest?classId=@register.ClassId">Gửi tin nhắn</a>
                                                     </td>
                                                 </tr>
 

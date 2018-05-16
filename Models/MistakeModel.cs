@@ -17,12 +17,12 @@ namespace TrungTamAnhNgu.Models
             return this.dataContext.MadeMistakes.Find(new object[] { mistakeId, username, classId, classNum });
         }
 
-        private List<MadeMistake> GetListMadeMistakeOfRegister(string username,string classId)
+        public List<MadeMistake> GetListMadeMistakeOfRegister(string username,string classId)
         {
             return this.dataContext.MadeMistakes.Where(p => p.StudentUsername.Equals(username) && p.ClassId.Equals(classId)).ToList();
         }
 
-        private List<MadeMistake> GetListMadeMistakeOfLesson(string classId,int classNumber)
+        public List<MadeMistake> GetListMadeMistakeOfLesson(string classId,int classNumber)
         {
             return this.dataContext.MadeMistakes.Where(p => p.ClassNumber== classNumber && p.ClassId.Equals(classId)).ToList();
         }
@@ -53,6 +53,12 @@ namespace TrungTamAnhNgu.Models
         public void Delete(MadeMistake madeMistake)
         {
             this.dataContext.MadeMistakes.Remove(madeMistake);
+            this.dataContext.SaveChanges();
+        }
+
+        public void Add(MadeMistake mistake)
+        {
+            this.dataContext.MadeMistakes.Add(mistake);
             this.dataContext.SaveChanges();
         }
     }

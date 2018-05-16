@@ -1,7 +1,6 @@
 ﻿@using TrungTamAnhNgu.Models
 @{
-    Homework homework= ViewBag.homework;
-    string deadLine = ((DateTime)homework.Lesson.DeadLine).ToString("yyyy-MM-dd");
+    Message message = ViewBag.message;
 }
 
 <!DOCTYPE html>
@@ -35,61 +34,38 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-validation">
+                                    <form class="form-valide" id="formAddMessage" action="/Teacher/UpdateMessageHandler" onsubmit="return validate()" method="post">
 
-                                    
-
-                                    <form class="form-valide" id="formSubmitHomework" action="/Student/SubmitHomeworkHandler" onsubmit="return validate()" method="post" enctype='multipart/form-data'>
+                                        <input type="hidden" name="id" value="@message.Id" readonly>
 
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label">ID Lớp </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" name="classId" value="@homework.ClassId" readonly>
+                                                <input type="text" class="form-control" name="classId" value="@message.Class.Id" readonly>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label">Tên lớp </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" value="@homework.Lesson.Class.Name" readonly>
+                                                <input type="text" class="form-control" value="@message.Class.Name" readonly>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label">Buổi số </label>
+                                            <label class="col-lg-4 col-form-label">Nội dung tin nhắn <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" name="classNumber" value="@homework.Lesson.ClassNumber" readonly>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label">Nội dung bài học </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" value="@homework.Lesson.LessionContent" readonly>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label">Hạn nộp </label>
-                                            <div class="col-lg-6">
-                                                <input type="date" class="form-control" name="deadLine" value="@deadLine" readonly>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label">Bài làm<span class="text-danger">*</span></label>
-                                            <div class="col-lg-6">
-                                                <input type="file" class="form-control" name="homework">
+                                                <textarea name="content" cols="30" rows="5">@message.Content</textarea>
                                             </div>
                                             <br>
-                                            <div class="text-danger" id="homeworkWarning"> </div>
+                                            <div class="text-danger" id="contentWarning"> </div>
                                         </div>
 
-                                        <br>
-                                        <div class="text-danger" id="deadLineWarning"> </div>
+
 
                                         <div class="form-group row">
                                             <div class="col-lg-8 ml-auto">
-                                                <button type="submit" class="btn btn-primary">Nộp</button>
+                                                <button type="submit" class="btn btn-primary">Thay đổi</button>
                                             </div>
                                         </div>
                                     </form>
@@ -114,11 +90,14 @@
         <script src="~/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
         <script src="~/js/custom.min.js"></script>
 
-        <script src="~/js/lib/form-validation/SubmitHomework.validate.js"></script>
+
+        <script src="~/js/lib/form-validation/AddMesssage.validate.js"></script>
+
     </div>
 </body>
 
 </html>
+
 
 
 

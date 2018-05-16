@@ -26,6 +26,7 @@ namespace TrungTamAnhNgu.Models
             oldLesson.LessionContent = lesson.LessionContent;
             oldLesson.Location = lesson.Location;
             oldLesson.Day = lesson.Day;
+            oldLesson.DeadLine = lesson.DeadLine;
             this.dataContext.SaveChanges();
         }
 

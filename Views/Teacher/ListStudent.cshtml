@@ -1,6 +1,7 @@
 ﻿@using TrungTamAnhNgu.Models
 @{
-    List<Class> classes = ViewBag.classes;
+    Class c = ViewBag.c;
+    List<Student> students = ViewBag.students;
 }
 
 <!DOCTYPE html>
@@ -26,41 +27,43 @@
         <div class="page-wrapper" style="margin-left:0px">
 
             <!-- Container fluid  -->
-            <div class="container-fluid" >
+            <div class="container-fluid">
 
                 <div class="row">
                     <div class="col-12">
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Danh sách các lớp học của bạn</h4>
-                               
-                                <div class="table-responsive m-t-40" >
+                                <h4 class="card-title">Danh sách các học viên của lớp @c.Id - @c.Name  </h4>
+                                <a href="/Teacher/ExportListStudent">Xuất ra file exel</a>
+                                <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Mã</th>
+                                                <th>Mã tên</th>
+                                                <th>CMND</th>
                                                 <th>Tên</th>
-                                                <th>Học phí</th>
-                                                <th>Chức năng</th>
+                                                <th>Ngày sinh</th>
+                                                <th>Email</th>
+                                                <th>SĐT</th>
+                                                <th>Trường</th>
+                                                <th>Năm</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (Class c in classes)
+                                            @foreach (Student student in students)
                                             {
 
-                                                <tr>
-                                                    <td>@c.Id</td>
-                                                    <td>@c.Name</td>
-                                                    <td>@c.Charge</td>
-                                                    <td>
-                                                        <a href="/Teacher/ClassInfo?classId=@c.Id">Xem chi tiết</a>
-                                                        -
-                                                        <a href="/Teacher/ViewMessage?classId=@c.Id">Thông báo </a>
-                                                        -
-                                                        <a href="/Teacher/ListStudent?classId=@c.Id">Danh sách học viên</a>
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td>@student.UserName</td>
+                                                <td>@student.Id</td>
+                                                <td>@student.Name</td>
+                                                <td>@student.DayOfBirth</td>
+                                                <td>@student.Email</td>
+                                                <td>@student.PhoneNumber</td>
+                                                <td>@student.School</td>
+                                                <td>@student.Grade</td>
+                                            </tr>
 
                                             }
 
@@ -103,5 +106,9 @@
 </body>
 
 </html>
+
+
+
+
 
 

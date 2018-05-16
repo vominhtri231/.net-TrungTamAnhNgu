@@ -15,8 +15,21 @@ namespace TrungTamAnhNgu.Controllers
             string username = HttpContext.Request.Cookies["login"]["name"];
             RegisterModel registerModel = new RegisterModel();
             ViewBag.registers = registerModel.ListRegisterOfStudent(username);
+            MessageModel messageModel = new MessageModel();
+            ViewBag.messages=messageModel.GetMessagesOfStudent(username);
             return View();
             
+        }
+
+        public ActionResult Logout()
+        {
+            if (HttpContext.Request.Cookies["login"] != null)
+            {
+                HttpCookie cookie = new HttpCookie("login");
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                Response.SetCookie(cookie);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult RegisterInfo(string classId)
@@ -75,5 +88,51 @@ namespace TrungTamAnhNgu.Controllers
             }
             Request.Files[formAtt].SaveAs(fileLocation);
         }
+
+        public ActionResult ViewScore(string classId, int classNumber)
+        {
+            HomeworkModel homeworkModel = new HomeworkModel();
+            LessonModel lessonModel = new LessonModel();
+            ViewBag.homeworks=homeworkModel.GetListHomeworkOfLesson(classId, classNumber);
+            ViewBag.lesson = lessonModel.GetLesson(classId, classNumber);
+            return View();
+        }
+
+        public ActionResult ViewMadeMistake(string classId)
+        {
+            string username = HttpContext.Request.Cookies["login"]["name"];
+            MistakeModel mistakeModel = new MistakeModel();
+            ViewBag.madeMistakes = mistakeModel.GetListMadeMistakeOfRegister(username, classId);
+            RegisterModel registerModel = new RegisterModel();
+            ViewBag.register = registerModel.GetRegister(classId, username);
+            return View();
+        }
+
+        #region request
+
+        public ActionResult SendRequest(string classId)
+        {
+            string username = HttpContext.Request.Cookies["login"]["name"];
+            RegisterModel registerModel = new RegisterModel();
+            ViewBag.register = registerModel.GetRegister(classId, username);
+            return View();
+        }
+
+        public ActionResult SendRequestHandler(FormCollection form)
+        {
+            string username = HttpContext.Request.Cookies["login"]["name"];
+            string classId = form["classId"].Trim();
+            string content = form["content"].Trim();
+            Request request = new Request()
+            {
+                ClassId = classId,
+                Content = content,
+                StudentUsername = username,
+            };
+            RequestModel requestModel = new RequestModel();
+            requestModel.Add(request);
+            return RedirectToAction("Index");
+        }
+        #endregion
     }
 }

@@ -162,58 +162,67 @@
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\Admin.cs">
-      <DependentUpon>DataContext.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Class.cs">
-      <DependentUpon>DataContext.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClassModel.cs" />
     <Compile Include="Models\Common.cs" />
-    <Compile Include="Models\DataContext.Context.cs">
+    <Compile Include="Models\DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataContext.Context.tt</DependentUpon>
+      <DependentUpon>DataModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataContext.cs">
+    <Compile Include="Models\DataModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataContext.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataContext.Designer.cs">
+    <Compile Include="Models\DataModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataContext.edmx</DependentUpon>
+      <DependentUpon>DataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Homework.cs">
-      <DependentUpon>DataContext.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HomeworkModel.cs" />
     <Compile Include="Models\Lesson.cs">
-      <DependentUpon>DataContext.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LessonModel.cs" />
     <Compile Include="Models\MadeMistake.cs">
-      <DependentUpon>DataContext.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Message.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\Mistake.cs">
-      <DependentUpon>DataContext.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MistakeModel.cs" />
-    <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Register.cs">
-      <DependentUpon>DataContext.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\Request.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RequestModel.cs" />
     <Compile Include="Models\Student.cs">
-      <DependentUpon>DataContext.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\StudentModel.cs" />
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>DataContext.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Teacher.cs">
-      <DependentUpon>DataContext.tt</DependentUpon>
+      <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TypeMistakeModel.cs" />
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\StudentModel.cs" />
     <Compile Include="Models\TeacherModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -417,6 +426,9 @@
     <Content Include="js\lib\datatables\datatables.min.js" />
     <Content Include="js\lib\form-validation\AddClass.validate.js" />
     <Content Include="js\lib\form-validation\AddLesson.validate.js" />
+    <Content Include="js\lib\form-validation\AddMesssage.validate.js" />
+    <Content Include="js\lib\form-validation\Mark.validate.js" />
+    <Content Include="js\lib\form-validation\SubmitHomework.validate.js" />
     <Content Include="js\lib\form-validation\UpdateLesson.validate.js" />
     <Content Include="js\lib\jquery\jquery.min.js" />
     <Content Include="js\lib\sticky-kit-master\dist\sticky-kit.min.js" />
@@ -500,15 +512,15 @@
     <Content Include="css\less\widget-stat.less" />
     <Content Include="css\others\bootstrap.css.map" />
     <Content Include="js\lib\form-validation\User.validate.js" />
-    <Content Include="Models\DataContext.Context.tt">
+    <Content Include="Models\DataModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataContext.edmx</DependentUpon>
-      <LastGenOutput>DataContext.Context.cs</LastGenOutput>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DataContext.tt">
+    <Content Include="Models\DataModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DataContext.edmx</DependentUpon>
-      <LastGenOutput>DataContext.cs</LastGenOutput>
+      <DependentUpon>DataModel.edmx</DependentUpon>
+      <LastGenOutput>DataModel.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -536,12 +548,12 @@
     <Folder Include="Content\Support\" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\DataContext.edmx">
+    <EntityDeploy Include="Models\DataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DataContext.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DataContext.edmx.diagram">
-      <DependentUpon>DataContext.edmx</DependentUpon>
+    <Content Include="Models\DataModel.edmx.diagram">
+      <DependentUpon>DataModel.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\Admin\UpdateClass.cshtml" />
@@ -556,9 +568,19 @@
     <Content Include="Views\Teacher\ClassInfo.cshtml" />
     <Content Include="Views\Teacher\AddLesson.cshtml" />
     <Content Include="Views\Teacher\UpdateLesson.cshtml" />
+    <Content Include="Views\Teacher\ViewHomework.cshtml" />
+    <Content Include="Views\Teacher\Mark.cshtml" />
+    <Content Include="Views\Teacher\ViewMistake.cshtml" />
+    <Content Include="Views\Teacher\AddMistake.cshtml" />
+    <Content Include="Views\Teacher\ViewMessage.cshtml" />
+    <Content Include="Views\Teacher\AddMessage.cshtml" />
+    <Content Include="Views\Teacher\UpdateMessage.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\RegisterInfo.cshtml" />
+    <Content Include="Views\Student\SendRequest.cshtml" />
     <Content Include="Views\Student\SubmitHomework.cshtml" />
+    <Content Include="Views\Student\ViewMadeMistake.cshtml" />
+    <Content Include="Views\Student\ViewScore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

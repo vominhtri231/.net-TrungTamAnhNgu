@@ -1,6 +1,7 @@
 ﻿@using TrungTamAnhNgu.Models
 @{
-    List<Class> classes = ViewBag.classes;
+    List<MadeMistake> mistakes = ViewBag.mistakes;
+    Lesson lesson = ViewBag.lesson;
 }
 
 <!DOCTYPE html>
@@ -26,39 +27,38 @@
         <div class="page-wrapper" style="margin-left:0px">
 
             <!-- Container fluid  -->
-            <div class="container-fluid" >
+            <div class="container-fluid">
 
                 <div class="row">
                     <div class="col-12">
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Danh sách các lớp học của bạn</h4>
-                               
-                                <div class="table-responsive m-t-40" >
+                                <h4 class="card-title">Danh sách các vi phạm của lớp @lesson.Class.Id - @lesson.Class.Name  </h4>
+                                <h4>Buổi học số @lesson.ClassNumber,nội dung '@lesson.LessionContent'</h4>
+                                <h4><a href="/Teacher/AddMistake?classId=@lesson.Class.Id.Trim()&classNumber=@lesson.ClassNumber">Thêm vi phạm</a></h4>
+                                <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Mã</th>
+                                                <th>Mã học viên </th>
                                                 <th>Tên</th>
-                                                <th>Học phí</th>
+                                                <th>Email</th>
+                                                <th>Lỗi</th>
                                                 <th>Chức năng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (Class c in classes)
+                                            @foreach (MadeMistake mistake in mistakes)
                                             {
 
                                                 <tr>
-                                                    <td>@c.Id</td>
-                                                    <td>@c.Name</td>
-                                                    <td>@c.Charge</td>
+                                                    <td>@mistake.StudentUsername</td>
+                                                    <td>@mistake.Register.Student.Name</td>
+                                                    <td>@mistake.Register.Student.Email</td>
+                                                    <td>@mistake.Mistake.Description</td>
                                                     <td>
-                                                        <a href="/Teacher/ClassInfo?classId=@c.Id">Xem chi tiết</a>
-                                                        -
-                                                        <a href="/Teacher/ViewMessage?classId=@c.Id">Thông báo </a>
-                                                        -
-                                                        <a href="/Teacher/ListStudent?classId=@c.Id">Danh sách học viên</a>
+                                                        <a href="/Teacher/DeleteMistake?username=@mistake.StudentUsername.Trim()&classId=@lesson.Class.Id.Trim()&classNumber=@lesson.ClassNumber&id=@mistake.MistakeId">Xóa</a>
                                                     </td>
                                                 </tr>
 
@@ -103,5 +103,8 @@
 </body>
 
 </html>
+
+
+
 
 

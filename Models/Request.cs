@@ -12,15 +12,14 @@ namespace TrungTamAnhNgu.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MadeMistake
+    public partial class Request
     {
-        public string MistakeId { get; set; }
+        public int Id { get; set; }
         public string StudentUsername { get; set; }
         public string ClassId { get; set; }
-        public int ClassNumber { get; set; }
+        public string Content { get; set; }
+        public Nullable<System.DateTime> Day { get; set; }
     
-        public virtual Lesson Lesson { get; set; }
-        public virtual Mistake Mistake { get; set; }
         public virtual Register Register { get; set; }
     }
 }

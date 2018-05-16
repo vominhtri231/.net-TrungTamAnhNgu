@@ -1,0 +1,103 @@
+﻿@using TrungTamAnhNgu.Models
+@{
+    Class c = ViewBag.c;
+    List<Message> messages = c.Messages.ToList();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/helper.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+</head>
+
+<body class="fix-header fix-sidebar">
+
+    <!-- Main wrapper  -->
+    <div id="main-wrapper">
+
+        @Html.Partial("~/Views/Shared/_Header.cshtml")
+
+        <!-- Page wrapper  -->
+        <div class="page-wrapper" style="margin-left:0px">
+
+            <!-- Container fluid  -->
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>Các thông báo của bạn đến lớp @c.Id - @c.Name </h4>
+                             <div><a href="/Teacher/AddMessage?classId=@c.Id">Thêm tin nhắn</a></div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Ngày</th>
+                                            <th>Nội dung</th>
+                                            <th>Chức năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach(Message message in messages)
+                                        {
+                                           <tr>
+                                               <td> @message.Id</td>
+                                               <td> @message.Day</td>
+                                               <td>@message.Content</td>
+                                               <td>
+                                                   <a href="/Teacher/UpdateMessage?id=@message.Id">Sửa</a>
+                                                   -
+                                                   <a href="/Teacher/DeleteMessage?id=@message.Id">Xóa</a>
+                                               </td>
+                                           </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Container fluid  -->
+    </div>
+    <!-- End Page wrapper  -->
+    <!-- script -->
+    <script src="~/js/lib/jquery/jquery.min.js"></script>
+    <script src="~/js/lib/bootstrap/js/popper.min.js"></script>
+    <script src="~/js/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.slimscroll.js"></script>
+    <script src="~/js/sidebarmenu.js"></script>
+    <script src="~/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="~/js/custom.min.js"></script>
+
+
+    <script src="~/js/lib/datatables/datatables.min.js"></script>
+    <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="~/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="~/js/lib/datatables/datatables-init.js"></script>
+
+    </div>
+</body>
+
+</html>
+
+
+

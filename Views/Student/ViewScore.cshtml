@@ -1,6 +1,7 @@
 ﻿@using TrungTamAnhNgu.Models
 @{
-    List<Class> classes = ViewBag.classes;
+    List<Homework> homeworks = ViewBag.homeworks;
+    Lesson lesson = ViewBag.lesson;
 }
 
 <!DOCTYPE html>
@@ -26,44 +27,48 @@
         <div class="page-wrapper" style="margin-left:0px">
 
             <!-- Container fluid  -->
-            <div class="container-fluid" >
+            <div class="container-fluid">
 
                 <div class="row">
                     <div class="col-12">
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Danh sách các lớp học của bạn</h4>
-                               
-                                <div class="table-responsive m-t-40" >
+                                <h4 class="card-title">Danh sách các bài về nhà của lớp @lesson.ClassId -@lesson.Class.Name,buổi số @lesson.ClassNumber</h4>
+
+                                <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Mã</th>
+                                                <th>Mã học viên </th>
                                                 <th>Tên</th>
-                                                <th>Học phí</th>
-                                                <th>Chức năng</th>
+                                                <th>Email</th>
+                                                <th>Bài làm</th>
+                                                <th>Điểm</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (Class c in classes)
+                                            @foreach (Homework homework in homeworks)
                                             {
 
                                                 <tr>
-                                                    <td>@c.Id</td>
-                                                    <td>@c.Name</td>
-                                                    <td>@c.Charge</td>
+                                                    <td>@homework.StudentUsername</td>
+                                                    <td>@homework.Register.Student.Name</td>
+                                                    <td>@homework.Register.Student.Email</td>
                                                     <td>
-                                                        <a href="/Teacher/ClassInfo?classId=@c.Id">Xem chi tiết</a>
-                                                        -
-                                                        <a href="/Teacher/ViewMessage?classId=@c.Id">Thông báo </a>
-                                                        -
-                                                        <a href="/Teacher/ListStudent?classId=@c.Id">Danh sách học viên</a>
+                                                        @if (homework.HomeworkContent != null)
+                                                        {
+                                                            <a target="_blank" href="/Download?file=@homework.HomeworkContent">download</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>Chưa nộp bài</span>
+                                                        }
                                                     </td>
+                                                    <td>@homework.Score</td>
+                                                    
                                                 </tr>
-
                                             }
-
 
                                         </tbody>
                                     </table>
@@ -103,5 +108,8 @@
 </body>
 
 </html>
+
+
+
 
 

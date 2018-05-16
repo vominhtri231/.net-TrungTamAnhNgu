@@ -37,6 +37,13 @@ function validate() {
         document.getElementById("locationWarning").innerHTML = "";
     }
 
+    if (formAdd.deadLine.value.trim().length == 0) {
+        res = false;
+        document.getElementById("deadLineWarning").innerHTML = "không được để trống";
+    } else {
+        document.getElementById("deadLineWarning").innerHTML = "";
+    }
+
     if (formAdd.homework.value.trim().length == 0) {
         res = false;
         document.getElementById("homeworkWarning").innerHTML = "phải có file kèm";

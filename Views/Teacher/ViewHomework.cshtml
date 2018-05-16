@@ -1,6 +1,7 @@
 ﻿@using TrungTamAnhNgu.Models
 @{
-    Register register = ViewBag.register;
+    List<Homework> homeworks = ViewBag.homeworks;
+    Lesson lesson = ViewBag.lesson;
 }
 
 <!DOCTYPE html>
@@ -33,62 +34,47 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Danh sách các buổi học của lớp @register.Class.Id -@register.Class.Name</h4>
-                                <h4><a href="/Student/ViewMadeMistake?classId=@register.ClassId">Xem các lỗi của bạn</a></h4>
+                                <h4 class="card-title">Danh sách các bài làm của lớp @lesson.Class.Id - @lesson.Class.Name  </h4>
+                                <h4>Buổi học số @lesson.ClassNumber,nội dung '@lesson.LessionContent'</h4>
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Buổi số </th>
-                                                <th>Ngày học</th>
-                                                <th>Địa điểm</th>
-                                                <th>Nội dung</th>
-                                                <th>Bài về nhà</th>
-                                                <th>Tài liệu</th>
+                                                <th>Mã học viên </th>
+                                                <th>Tên</th>
+                                                <th>Email</th>
+                                                <th>Bài làm</th>
+                                                <th>Điểm</th>
                                                 <th>Chức năng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (Lesson lesson in register.Class.Lessons)
+                                            @foreach (Homework homework in homeworks)
                                             {
 
-                                            <tr>
-                                                <td>@lesson.ClassNumber</td>
-                                                <td>@lesson.Day</td>
-                                                <td>@lesson.Location</td>
-                                                <td>@lesson.LessionContent</td>
-                                                 <td>
-                                                 @if (lesson.HomeworkQuestion != null)
-                                                 {
-                                                     <a target="_blank" href="/Download?file=@lesson.HomeworkQuestion">download</a>
-                                                }
-                                                else 
-                                                {
-                                                    <span>Chưa có </span>
-                                                }
-                                                </td>
-                                                <td>
-                                                 @if (lesson.SupportMaterial != null)
-                                                 {
-                                                    <a target="_blank" href="/Download?file=@lesson.SupportMaterial">download </a>
-                                                }
-                                                else 
-                                                {
-                                                    <span>Chưa có </span>
-                                                }
-                                                </td>
-                                                <td>
-                                                    @if (DateTime.Now <= lesson.DeadLine)
+                                                <tr>
+                                                    <td>@homework.StudentUsername</td>
+                                                    <td>@homework.Register.Student.Name</td>
+                                                    <td>@homework.Register.Student.Email</td>
+                                                    <td>
+                                                        @if (homework.HomeworkContent != null) 
+                                                        { 
+                                                            <a target="_blank" href="/Download?file=@homework.HomeworkContent">download</a>
+                                                        }
+                                                        else 
+                                                        {
+                                                            <span>Chưa nộp bài</span>
+                                                        }
+                                                    </td>
+                                                    <td>@homework.Score</td>
+                                                    <td>
+                                                         @if (DateTime.Now > lesson.DeadLine)
                                                     { 
-                                                         <a href="/Student/SubmitHomework?classId=@register.ClassId&classNumber=@lesson.ClassNumber">Nộp bài</a>
+                                                         
+                                                         <a href="/Teacher/Mark?username=@homework.StudentUsername.Trim()&classId=@lesson.Class.Id.Trim()&classNumber=@lesson.ClassNumber">Chấm bài</a>
                                                     }
-                                                    else
-                                                    {
-                                                         <a href="/Student/ViewScore?classId=@register.ClassId&classNumber=@lesson.ClassNumber">Xem điểm</a>
-                                                    }
-
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
 
                                             }
 

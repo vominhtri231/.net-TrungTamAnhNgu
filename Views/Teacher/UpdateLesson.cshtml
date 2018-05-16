@@ -2,6 +2,7 @@
 @{
     Lesson lesson = ViewBag.lesson;
     string day = ((DateTime)lesson.Day).ToString("yyyy-MM-dd");
+    string deadLine= ((DateTime)lesson.DeadLine).ToString("yyyy-MM-dd");
 }
 
 <!DOCTYPE html>
@@ -89,17 +90,25 @@
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label">Bài tập</label>
                                             <div class="col-lg-6">
-                                                <input type="file" class="form-control" name="homework" >
+                                                <input type="file" class="form-control" name="homework">
                                             </div>
-                                            
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label"> Hạn nộp<span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input type="date" class="form-control" name="deadLine" value="@deadLine">
+                                            </div>
+                                            <br>
+                                            <div class="text-danger" id="deadLineWarning"> </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label">Tài liệu</label>
                                             <div class="col-lg-6">
-                                                <input type="file" class="form-control" name="support" >
+                                                <input type="file" class="form-control" name="support">
                                             </div>
-                                           
+
                                         </div>
 
                                         <div class="form-group row">

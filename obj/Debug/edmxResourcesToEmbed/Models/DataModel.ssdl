@@ -59,15 +59,15 @@
     <Property Name="StudentUsername" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="ClassId" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="ClassNumber" Type="int" Nullable="false" />
-    <Property Name="IsPay" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Message">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ClassId" Type="nchar" MaxLength="50" />
     <Property Name="Content" Type="nchar" MaxLength="500" />
+    <Property Name="Day" Type="date" />
   </EntityType>
   <EntityType Name="Mistake">
     <Key>
@@ -85,6 +85,16 @@
     <Property Name="ClassId" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="StudentUsername" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="IsPay" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Request">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentUsername" Type="nchar" MaxLength="50" />
+    <Property Name="ClassId" Type="nchar" MaxLength="50" />
+    <Property Name="Content" Type="nchar" MaxLength="500" />
+    <Property Name="Day" Type="date" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -252,6 +262,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Request_Register">
+    <End Role="Register" Type="Self.Register" Multiplicity="0..1" />
+    <End Role="Request" Type="Self.Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Register">
+        <PropertyRef Name="ClassId" />
+        <PropertyRef Name="StudentUsername" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="ClassId" />
+        <PropertyRef Name="StudentUsername" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="TrungTamAnhNguModelStoreContainer">
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
@@ -261,6 +285,7 @@
     <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mistake" EntityType="Self.Mistake" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Register" EntityType="Self.Register" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
@@ -303,6 +328,10 @@
     <AssociationSet Name="FK_Register_Student" Association="Self.FK_Register_Student">
       <End Role="Student" EntitySet="Student" />
       <End Role="Register" EntitySet="Register" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Request_Register" Association="Self.FK_Request_Register">
+      <End Role="Register" EntitySet="Register" />
+      <End Role="Request" EntitySet="Request" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

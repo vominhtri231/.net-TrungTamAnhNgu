@@ -1,7 +1,6 @@
 ﻿@using TrungTamAnhNgu.Models
 @{
-    Homework homework= ViewBag.homework;
-    string deadLine = ((DateTime)homework.Lesson.DeadLine).ToString("yyyy-MM-dd");
+    Homework homework = ViewBag.homework;
 }
 
 <!DOCTYPE html>
@@ -35,13 +34,24 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-validation">
-
-                                    
-
-                                    <form class="form-valide" id="formSubmitHomework" action="/Student/SubmitHomeworkHandler" onsubmit="return validate()" method="post" enctype='multipart/form-data'>
+                                    <form class="form-valide" id="formMark" action="/Teacher/MarkHandler" onsubmit="return validate()" method="post" >
 
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label">ID Lớp </label>
+                                            <label class="col-lg-4 col-form-label">Mã học viên </label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" name="username" value="@homework.StudentUsername" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Tên học viên </label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" value="@homework.Register.Student.Name" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Mã lớp </label>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" name="classId" value="@homework.ClassId" readonly>
                                             </div>
@@ -55,41 +65,31 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label">Buổi số </label>
+                                            <label class="col-lg-4 col-form-label">Buổi học số </label>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" name="classNumber" value="@homework.Lesson.ClassNumber" readonly>
                                             </div>
-                                        </div>
+                                        </div>                                       
 
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label">Nội dung bài học </label>
+                                            <label class="col-lg-4 col-form-label">Bài làm</label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" value="@homework.Lesson.LessionContent" readonly>
+                                                <a target="_blank" href="/Download?file=@homework.HomeworkContent">download</a>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label">Hạn nộp </label>
+                                            <label class="col-lg-4 col-form-label">Điểm<span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
-                                                <input type="date" class="form-control" name="deadLine" value="@deadLine" readonly>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label">Bài làm<span class="text-danger">*</span></label>
-                                            <div class="col-lg-6">
-                                                <input type="file" class="form-control" name="homework">
+                                                <input type="text" class="form-control" name="score" value="@homework.Score">
                                             </div>
                                             <br>
-                                            <div class="text-danger" id="homeworkWarning"> </div>
+                                            <div class="text-danger" id="scoreWarning"> </div>
                                         </div>
-
-                                        <br>
-                                        <div class="text-danger" id="deadLineWarning"> </div>
 
                                         <div class="form-group row">
                                             <div class="col-lg-8 ml-auto">
-                                                <button type="submit" class="btn btn-primary">Nộp</button>
+                                                <button type="submit" class="btn btn-primary">Thay đổi</button>
                                             </div>
                                         </div>
                                     </form>
@@ -114,11 +114,14 @@
         <script src="~/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
         <script src="~/js/custom.min.js"></script>
 
-        <script src="~/js/lib/form-validation/SubmitHomework.validate.js"></script>
+
+        <script src="~/js/lib/form-validation/Mark.validate.js"></script>
+
     </div>
 </body>
 
 </html>
+
 
 
 

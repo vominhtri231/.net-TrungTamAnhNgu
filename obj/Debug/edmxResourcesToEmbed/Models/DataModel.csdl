@@ -68,7 +68,6 @@
     <Property Name="StudentUsername" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="ClassId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="ClassNumber" Type="Int32" Nullable="false" />
-    <Property Name="IsPay" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Lesson" Relationship="Self.FK_MadeMistake_Lesson" FromRole="MadeMistake" ToRole="Lesson" />
     <NavigationProperty Name="Mistake" Relationship="Self.FK_MadeMistake_Mistake" FromRole="MadeMistake" ToRole="Mistake" />
     <NavigationProperty Name="Register" Relationship="Self.FK_MadeMistake_Register" FromRole="MadeMistake" ToRole="Register" />
@@ -77,9 +76,10 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ClassId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="Content" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="Day" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Class" Relationship="Self.FK_Message_Class" FromRole="Message" ToRole="Class" />
   </EntityType>
   <EntityType Name="Mistake">
@@ -103,6 +103,18 @@
     <NavigationProperty Name="Homework" Relationship="Self.FK_Homework_Register" FromRole="Register" ToRole="Homework" />
     <NavigationProperty Name="MadeMistakes" Relationship="Self.FK_MadeMistake_Register" FromRole="Register" ToRole="MadeMistake" />
     <NavigationProperty Name="Student" Relationship="Self.FK_Register_Student" FromRole="Register" ToRole="Student" />
+    <NavigationProperty Name="Requests" Relationship="Self.FK_Request_Register" FromRole="Register" ToRole="Request" />
+  </EntityType>
+  <EntityType Name="Request">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentUsername" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="ClassId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+    <Property Name="Day" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Register" Relationship="Self.FK_Request_Register" FromRole="Request" ToRole="Register" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -272,6 +284,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Request_Register">
+    <End Role="Register" Type="Self.Register" Multiplicity="0..1" />
+    <End Role="Request" Type="Self.Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Register">
+        <PropertyRef Name="ClassId" />
+        <PropertyRef Name="StudentUsername" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="ClassId" />
+        <PropertyRef Name="StudentUsername" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="TrungTamAnhNguEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Admins" EntityType="Self.Admin" />
     <EntitySet Name="Classes" EntityType="Self.Class" />
@@ -281,6 +307,7 @@
     <EntitySet Name="Messages" EntityType="Self.Message" />
     <EntitySet Name="Mistakes" EntityType="Self.Mistake" />
     <EntitySet Name="Registers" EntityType="Self.Register" />
+    <EntitySet Name="Requests" EntityType="Self.Request" />
     <EntitySet Name="Students" EntityType="Self.Student" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Teachers" EntityType="Self.Teacher" />
@@ -323,6 +350,10 @@
     <AssociationSet Name="FK_Register_Student" Association="Self.FK_Register_Student">
       <End Role="Student" EntitySet="Students" />
       <End Role="Register" EntitySet="Registers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Request_Register" Association="Self.FK_Request_Register">
+      <End Role="Register" EntitySet="Registers" />
+      <End Role="Request" EntitySet="Requests" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

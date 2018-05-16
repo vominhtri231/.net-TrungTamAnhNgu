@@ -30,8 +30,10 @@ namespace TrungTamAnhNgu.Models
         public virtual DbSet<Homework> Homework { get; set; }
         public virtual DbSet<Lesson> Lessons { get; set; }
         public virtual DbSet<MadeMistake> MadeMistakes { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Mistake> Mistakes { get; set; }
         public virtual DbSet<Register> Registers { get; set; }
+        public virtual DbSet<Request> Requests { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
