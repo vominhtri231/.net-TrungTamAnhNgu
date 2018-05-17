@@ -48,28 +48,28 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach(Request request in requests)
+                                            @foreach (Request request in requests)
+                                        {
+                                            if (@request.Day.Value.AddDays(3) >= DateTime.Now)
                                             {
-                                                if (@request.Day.Value.AddDays(3) >= DateTime.Now)
-                                                {
-                                                    <tr >
-                                                        <td class="color-danger">@request.StudentUsername</td>
-                                                        <td class="color-danger">@request.Register.Student.Name</td>
-                                                        <td class="color-danger">@request.Day</td>
-                                                        <td class="color-danger">@request.Content</td>
-                                                    </tr>
-                                                }
-                                                else
-                                                {
-                                                    <tr>
-                                                        <td>@request.StudentUsername</td>
-                                                        <td>@request.Register.Student.Name</td>
-                                                        <td>@request.Day</td>
-                                                        <td>@request.Content</td>
-                                                    </tr>
-                                                }
-                                                
-                                            }
+                                                <tr>
+                                                    <td class="color-danger">@request.StudentUsername</td>
+                                                    <td class="color-danger">@request.Register.Student.Name</td>
+                                                    <td class="color-danger">@request.Day</td>
+                                                    <td class="color-danger">@request.Content</td>
+                                                </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>@request.StudentUsername</td>
+                                                <td>@request.Register.Student.Name</td>
+                                                <td>@request.Day</td>
+                                                <td>@request.Content</td>
+                                            </tr>
+                                    }
+
+                                }
 
 
                                         </tbody>
@@ -105,48 +105,48 @@
                                         </thead>
                                         <tbody>
                                             @foreach (Lesson lesson in lessons)
-                                {
+                                        {
 
-                                    <tr>
-                                        <td>@lesson.ClassNumber</td>
-                                        <td>@lesson.Day</td>
-                                        <td>@lesson.Location</td>
-                                        <td>@lesson.LessionContent</td>
-                                        <td>
-                                            @if (lesson.HomeworkQuestion != null)
-                                {
-                                    <a target="_blank" href="/Download?file=@lesson.HomeworkQuestion">download</a>
-                    }
-                    else
-                    {
-                        <span>Chưa có </span>
-        }
-                                        </td>
+                                            <tr>
+                                                <td>@lesson.ClassNumber</td>
+                                                <td>@lesson.Day</td>
+                                                <td>@lesson.Location</td>
+                                                <td>@lesson.LessionContent</td>
+                                                <td>
+                                                    @if (lesson.HomeworkQuestion != null)
+                                                {
+                                                    <a target="_blank" href="/Download?file=@lesson.HomeworkQuestion">download</a>
+                                            }
+                                            else
+                                            {
+                                                <span>Chưa có </span>
+                                        }
+                                                </td>
 
-                                        <td>@lesson.DeadLine</td>
-                                        <td>
-                                            @if (lesson.SupportMaterial != null)
-                                {
-                                    <a target="_blank" href="/Download?file=@lesson.SupportMaterial">download </a>
-                    }
-                    else
-                    {
-                        <span>Chưa có </span>
-        }
-                                        </td>
-                                        <td>
-                                            <a href="/Teacher/UpdateLesson?classId=@lesson.ClassId.Trim()&classNumber=@lesson.ClassNumber">Thay đổi</a>
-                                            -
-                                            <a href="/Teacher/DeleteLesson?classId=@lesson.ClassId.Trim()&classNumber=@lesson.ClassNumber">Xóa</a>
-                                            -
-                                            <a href="/Teacher/ViewHomework?classId=@lesson.ClassId.Trim()&classNumber=@lesson.ClassNumber">Xem bài làm</a>
-                                            -
-                                            <a href="/Teacher/ViewMistake?classId=@lesson.ClassId.Trim()&classNumber=@lesson.ClassNumber">Xem các lỗi</a>
+                                                <td>@lesson.DeadLine</td>
+                                                <td>
+                                                    @if (lesson.SupportMaterial != null)
+                                                {
+                                                    <a target="_blank" href="/Download?file=@lesson.SupportMaterial">download </a>
+                                            }
+                                            else
+                                            {
+                                                <span>Chưa có </span>
+                                        }
+                                                </td>
+                                                <td>
+                                                    <a href="/Teacher/UpdateLesson?classId=@lesson.ClassId.Trim()&classNumber=@lesson.ClassNumber">Thay đổi</a>
+                                                    -
+                                                    <a href="/Teacher/DeleteLesson?classId=@lesson.ClassId.Trim()&classNumber=@lesson.ClassNumber">Xóa</a>
+                                                    -
+                                                    <a href="/Teacher/ViewHomework?classId=@lesson.ClassId.Trim()&classNumber=@lesson.ClassNumber">Xem bài làm</a>
+                                                    -
+                                                    <a href="/Teacher/ViewMistake?classId=@lesson.ClassId.Trim()&classNumber=@lesson.ClassNumber">Xem các lỗi</a>
 
-                                        </td>
-                                    </tr>
+                                                </td>
+                                            </tr>
 
-                    }
+                                    }
 
 
                                         </tbody>
@@ -174,15 +174,10 @@
 
 
 
-        <script src="~/js/lib/datatables/datatables.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-        <script src="~/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-        <script src="~/js/lib/datatables/datatables-init.js"></script>
+        <script src="~/js/lib/datatables/initTable.js"></script>
+        <script src="~/js/lib/datatables/searchData.js"></script>
+        <script src="~/js/lib/datatables/sortData.js"></script>
+        <link href="~/css/lib/data-table/dataTables.css" rel="stylesheet"/>
     </div>
 </body>
 

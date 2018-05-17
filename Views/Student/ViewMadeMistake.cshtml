@@ -36,7 +36,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Danh sách các vi phạm  của bạn ở lớp @register.Class.Id -@register.Class.Name</h4>
-                                
+
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
@@ -45,22 +45,22 @@
                                                 <th>Ngày học</th>
                                                 <th>Nội dung</th>
                                                 <th>Vi phạm</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach (MadeMistake mistake in madeMistakes)
-                                            {
+                                        {
 
-                                                <tr>
-                                                    <td>@mistake.Lesson.ClassNumber</td>
-                                                    <td>@mistake.Lesson.Day</td>
-                                                    <td>@mistake.Lesson.LessionContent</td>
-                                                    <td>@mistake.Mistake.Description</td>
-                                                  
-                                                </tr>
+                                            <tr>
+                                                <td>@mistake.Lesson.ClassNumber</td>
+                                                <td>@mistake.Lesson.Day</td>
+                                                <td>@mistake.Lesson.LessionContent</td>
+                                                <td>@mistake.Mistake.Description</td>
 
-                                            }
+                                            </tr>
+
+                                    }
 
 
                                         </tbody>
@@ -88,15 +88,10 @@
 
 
 
-        <script src="~/js/lib/datatables/datatables.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-        <script src="~/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-        <script src="~/js/lib/datatables/datatables-init.js"></script>
+        <script src="~/js/lib/datatables/initTable.js"></script>
+        <script src="~/js/lib/datatables/searchData.js"></script>
+        <script src="~/js/lib/datatables/sortData.js"></script>
+        <link href="~/css/lib/data-table/dataTables.css" rel="stylesheet"/>
     </div>
 </body>
 

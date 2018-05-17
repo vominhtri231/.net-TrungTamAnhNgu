@@ -37,7 +37,7 @@
                                 <h4 class="card-title">Thông báo</h4>
 
                                 <div class="table-responsive m-t-40">
-                                    <table id="myTable"  class="table">
+                                    <table id="myTable" class="table">
                                         <thead>
                                             <tr>
                                                 <th>Mã lớp</th>
@@ -47,31 +47,31 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
-                                            @foreach (Message message in messages)
-                                            {
-                                               
-                                                if (@message.Day.Value.AddDays(3) >= DateTime.Now)
-                                                {
-                                                    <tr >
-                                                        <td class="color-danger">@message.ClassId</td>
-                                                        <td class="color-danger">@message.Class.Name</td>
-                                                        <td class="color-danger">@message.Day</td>
-                                                        <td class="color-danger">@message.Content</td>
-                                                    </tr>
-                                                }
-                                                else
-                                                {
-                                                    <tr>
-                                                        <td>@message.ClassId</td>
-                                                        <td>@message.Class.Name</td>
-                                                        <td>@message.Day</td>
-                                                        <td>@message.Content</td>
-                                                    </tr>
-                                                }
-                                                
 
-                                            }
+                                            @foreach (Message message in messages)
+                                        {
+
+                                            if (@message.Day.Value.AddDays(3) >= DateTime.Now)
+                                            {
+                                                <tr>
+                                                    <td class="color-danger">@message.ClassId</td>
+                                                    <td class="color-danger">@message.Class.Name</td>
+                                                    <td class="color-danger">@message.Day</td>
+                                                    <td class="color-danger">@message.Content</td>
+                                                </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>@message.ClassId</td>
+                                                <td>@message.Class.Name</td>
+                                                <td>@message.Day</td>
+                                                <td>@message.Content</td>
+                                            </tr>
+                                    }
+
+
+                                }
 
 
                                         </tbody>
@@ -104,21 +104,21 @@
                                         </thead>
                                         <tbody>
                                             @foreach (Register register in registers)
-                                            {
+                                        {
 
-                                                <tr>
-                                                    <td>@register.ClassId</td>
-                                                    <td>@register.Class.Name</td>
-                                                    <td>@register.Class.Charge</td>
-                                                    <td>@register.IsPay</td>
-                                                    <td>
-                                                        <a href="/Student/RegisterInfo?classId=@register.ClassId">Xem chi tiết</a>
-                                                        -
-                                                        <a href="/Student/SendRequest?classId=@register.ClassId">Gửi tin nhắn</a>
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td>@register.ClassId</td>
+                                                <td>@register.Class.Name</td>
+                                                <td>@register.Class.Charge</td>
+                                                <td>@register.IsPay</td>
+                                                <td>
+                                                    <a href="/Student/RegisterInfo?classId=@register.ClassId">Xem chi tiết</a>
+                                                    -
+                                                    <a href="/Student/SendRequest?classId=@register.ClassId">Gửi tin nhắn</a>
+                                                </td>
+                                            </tr>
 
-                                            }
+                                    }
 
 
                                         </tbody>
@@ -146,15 +146,10 @@
 
 
 
-        <script src="~/js/lib/datatables/datatables.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-        <script src="~/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-        <script src="~/js/lib/datatables/datatables-init.js"></script>
+        <script src="~/js/lib/datatables/initTable.js"></script>
+        <script src="~/js/lib/datatables/searchData.js"></script>
+        <script src="~/js/lib/datatables/sortData.js"></script>
+        <link href="~/css/lib/data-table/dataTables.css" rel="stylesheet"/>
     </div>
 </body>
 

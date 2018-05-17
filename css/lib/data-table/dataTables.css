@@ -1,0 +1,21 @@
+﻿thead .sorting::after {
+    color: rgba(50, 50, 50, 0.5);
+    content: "";
+    cursor: pointer;
+    margin-left: 10px;
+    font-family: fontawesome !important;
+}
+
+thead .sorting_desc::after {
+    content: "";
+    cursor: pointer;
+    font-family: fontawesome;
+    margin-left: 10px;
+}
+
+thead .sorting_asc::after {
+    content: "";
+    cursor: pointer;
+    font-family: fontawesome;
+    margin-left: 10px;
+}

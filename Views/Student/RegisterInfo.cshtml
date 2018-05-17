@@ -50,47 +50,47 @@
                                         </thead>
                                         <tbody>
                                             @foreach (Lesson lesson in register.Class.Lessons)
-                                            {
+                                        {
 
                                             <tr>
                                                 <td>@lesson.ClassNumber</td>
                                                 <td>@lesson.Day</td>
                                                 <td>@lesson.Location</td>
                                                 <td>@lesson.LessionContent</td>
-                                                 <td>
-                                                 @if (lesson.HomeworkQuestion != null)
-                                                 {
-                                                     <a target="_blank" href="/Download?file=@lesson.HomeworkQuestion">download</a>
-                                                }
-                                                else 
+                                                <td>
+                                                    @if (lesson.HomeworkQuestion != null)
                                                 {
-                                                    <span>Chưa có </span>
-                                                }
+                                                    <a target="_blank" href="/Download?file=@lesson.HomeworkQuestion">download</a>
+                                            }
+                                            else
+                                            {
+                                                <span>Chưa có </span>
+                                        }
                                                 </td>
                                                 <td>
-                                                 @if (lesson.SupportMaterial != null)
-                                                 {
-                                                    <a target="_blank" href="/Download?file=@lesson.SupportMaterial">download </a>
-                                                }
-                                                else 
+                                                    @if (lesson.SupportMaterial != null)
                                                 {
-                                                    <span>Chưa có </span>
-                                                }
+                                                    <a target="_blank" href="/Download?file=@lesson.SupportMaterial">download </a>
+                                            }
+                                            else
+                                            {
+                                                <span>Chưa có </span>
+                                        }
                                                 </td>
                                                 <td>
                                                     @if (DateTime.Now <= lesson.DeadLine)
-                                                    { 
-                                                         <a href="/Student/SubmitHomework?classId=@register.ClassId&classNumber=@lesson.ClassNumber">Nộp bài</a>
-                                                    }
-                                                    else
-                                                    {
-                                                         <a href="/Student/ViewScore?classId=@register.ClassId&classNumber=@lesson.ClassNumber">Xem điểm</a>
-                                                    }
+                                                {
+                                                    <a href="/Student/SubmitHomework?classId=@register.ClassId&classNumber=@lesson.ClassNumber">Nộp bài</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="/Student/ViewScore?classId=@register.ClassId&classNumber=@lesson.ClassNumber">Xem điểm</a>
+                                        }
 
                                                 </td>
                                             </tr>
 
-                                            }
+                                    }
 
 
                                         </tbody>
@@ -118,15 +118,10 @@
 
 
 
-        <script src="~/js/lib/datatables/datatables.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-        <script src="~/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-        <script src="~/js/lib/datatables/datatables-init.js"></script>
+        <script src="~/js/lib/datatables/initTable.js"></script>
+        <script src="~/js/lib/datatables/searchData.js"></script>
+        <script src="~/js/lib/datatables/sortData.js"></script>
+        <link href="~/css/lib/data-table/dataTables.css" rel="stylesheet"/>
     </div>
 </body>
 

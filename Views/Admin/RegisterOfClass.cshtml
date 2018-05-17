@@ -52,24 +52,24 @@
                                         </thead>
                                         <tbody>
                                             @foreach (Register register in registers)
-                                            {
+                                        {
 
-                                                <tr>
-                                                    <td>@register.Student.UserName</td>
-                                                    <td>@register.Student.Name</td>
-                                                    <td>@register.Student.Email</td>
-                                                    <td>@register.Student.PhoneNumber</td>
-                                                    <td>@register.Student.School</td>
-                                                    <td>@register.Student.Grade</td>
-                                                    <td>@register.IsPay</td>
-                                                    <td>
-                                                        <a href="/Admin/DeleteRegister?classId=@classId&username=@register.Student.UserName">Xóa đăng kí</a>
-                                                        -
-                                                        <a href="/Admin/UpdateRegister?classId=@classId&username=@register.Student.UserName">Cập nhật đăng kí</a>
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td>@register.Student.UserName</td>
+                                                <td>@register.Student.Name</td>
+                                                <td>@register.Student.Email</td>
+                                                <td>@register.Student.PhoneNumber</td>
+                                                <td>@register.Student.School</td>
+                                                <td>@register.Student.Grade</td>
+                                                <td>@register.IsPay</td>
+                                                <td>
+                                                    <a href="/Admin/DeleteRegister?classId=@classId&username=@register.Student.UserName">Xóa đăng kí</a>
+                                                    -
+                                                    <a href="/Admin/UpdateRegister?classId=@classId&username=@register.Student.UserName">Cập nhật đăng kí</a>
+                                                </td>
+                                            </tr>
 
-                                            }
+                                    }
 
 
                                         </tbody>
@@ -97,15 +97,10 @@
 
 
 
-        <script src="~/js/lib/datatables/datatables.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-        <script src="~/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-        <script src="~/js/lib/datatables/datatables-init.js"></script>
+        <script src="~/js/lib/datatables/initTable.js"></script>
+        <script src="~/js/lib/datatables/searchData.js"></script>
+        <script src="~/js/lib/datatables/sortData.js"></script>
+        <link href="~/css/lib/data-table/dataTables.css" rel="stylesheet"/>
     </div>
 </body>
 

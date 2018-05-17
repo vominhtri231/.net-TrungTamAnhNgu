@@ -35,64 +35,59 @@
                         <div class="card">
                             <div class="card-title">
                                 <h4>Các thông báo của bạn đến lớp @c.Id - @c.Name </h4>
-                             <div><a href="/Teacher/AddMessage?classId=@c.Id">Thêm tin nhắn</a></div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table" id="myTable">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Ngày</th>
-                                            <th>Nội dung</th>
-                                            <th>Chức năng</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach(Message message in messages)
+                                <div><a href="/Teacher/AddMessage?classId=@c.Id">Thêm tin nhắn</a></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table" id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Ngày</th>
+                                                <th>Nội dung</th>
+                                                <th>Chức năng</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (Message message in messages)
                                         {
-                                           <tr>
-                                               <td> @message.Id</td>
-                                               <td> @message.Day</td>
-                                               <td>@message.Content</td>
-                                               <td>
-                                                   <a href="/Teacher/UpdateMessage?id=@message.Id">Sửa</a>
-                                                   -
-                                                   <a href="/Teacher/DeleteMessage?id=@message.Id">Xóa</a>
-                                               </td>
-                                           </tr>
-                                        }
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <td> @message.Id</td>
+                                                <td> @message.Day</td>
+                                                <td>@message.Content</td>
+                                                <td>
+                                                    <a href="/Teacher/UpdateMessage?id=@message.Id">Sửa</a>
+                                                    -
+                                                    <a href="/Teacher/DeleteMessage?id=@message.Id">Xóa</a>
+                                                </td>
+                                            </tr>
+                                    }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
-
+            <!-- End Container fluid  -->
         </div>
-        <!-- End Container fluid  -->
-    </div>
-    <!-- End Page wrapper  -->
-    <!-- script -->
-    <script src="~/js/lib/jquery/jquery.min.js"></script>
-    <script src="~/js/lib/bootstrap/js/popper.min.js"></script>
-    <script src="~/js/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/js/jquery.slimscroll.js"></script>
-    <script src="~/js/sidebarmenu.js"></script>
-    <script src="~/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="~/js/custom.min.js"></script>
+        <!-- End Page wrapper  -->
+        <!-- script -->
+        <script src="~/js/lib/jquery/jquery.min.js"></script>
+        <script src="~/js/lib/bootstrap/js/popper.min.js"></script>
+        <script src="~/js/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/js/jquery.slimscroll.js"></script>
+        <script src="~/js/sidebarmenu.js"></script>
+        <script src="~/js/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+        <script src="~/js/custom.min.js"></script>
 
 
-    <script src="~/js/lib/datatables/datatables.min.js"></script>
-    <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script src="~/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    <script src="~/js/lib/datatables/datatables-init.js"></script>
+        <script src="~/js/lib/datatables/initTable.js"></script>
+        <script src="~/js/lib/datatables/searchData.js"></script>
+        <script src="~/js/lib/datatables/sortData.js"></script>
+        <link href="~/css/lib/data-table/dataTables.css" rel="stylesheet"/>
 
     </div>
 </body>

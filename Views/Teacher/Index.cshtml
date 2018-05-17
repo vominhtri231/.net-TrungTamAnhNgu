@@ -11,6 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="~/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/lib/data-table/dataTables.css" rel="stylesheet" />
     <link href="~/css/helper.css" rel="stylesheet">
     <link href="~/css/style.css" rel="stylesheet">
 </head>
@@ -26,7 +27,7 @@
         <div class="page-wrapper" style="margin-left:0px">
 
             <!-- Container fluid  -->
-            <div class="container-fluid" >
+            <div class="container-fluid">
 
                 <div class="row">
                     <div class="col-12">
@@ -34,8 +35,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Danh sách các lớp học của bạn</h4>
-                               
-                                <div class="table-responsive m-t-40" >
+
+                                <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -47,22 +48,22 @@
                                         </thead>
                                         <tbody>
                                             @foreach (Class c in classes)
-                                            {
+                                        {
 
-                                                <tr>
-                                                    <td>@c.Id</td>
-                                                    <td>@c.Name</td>
-                                                    <td>@c.Charge</td>
-                                                    <td>
-                                                        <a href="/Teacher/ClassInfo?classId=@c.Id">Xem chi tiết</a>
-                                                        -
-                                                        <a href="/Teacher/ViewMessage?classId=@c.Id">Thông báo </a>
-                                                        -
-                                                        <a href="/Teacher/ListStudent?classId=@c.Id">Danh sách học viên</a>
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td>@c.Id</td>
+                                                <td>@c.Name</td>
+                                                <td>@c.Charge</td>
+                                                <td>
+                                                    <a href="/Teacher/ClassInfo?classId=@c.Id">Xem chi tiết</a>
+                                                    -
+                                                    <a href="/Teacher/ViewMessage?classId=@c.Id">Thông báo </a>
+                                                    -
+                                                    <a href="/Teacher/ListStudent?classId=@c.Id">Danh sách học viên</a>
+                                                </td>
+                                            </tr>
 
-                                            }
+                                    }
 
 
                                         </tbody>
@@ -90,15 +91,10 @@
 
 
 
-        <script src="~/js/lib/datatables/datatables.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-        <script src="~/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-        <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-        <script src="~/js/lib/datatables/datatables-init.js"></script>
+        <script src="~/js/lib/datatables/initTable.js"></script>
+        <script src="~/js/lib/datatables/searchData.js"></script>
+        <script src="~/js/lib/datatables/sortData.js"></script>
+        
     </div>
 </body>
 
