@@ -23,6 +23,11 @@ namespace TrungTamAnhNgu.Models
         {
             return this.dataContext.Messages.Join(dataContext.Registers.Where(p => p.StudentUsername.Equals(username)), a => a.ClassId, b => b.ClassId, (a, b) => a).ToList();
         }
+
+        public List<Message> GetMessagesOfClass(string classId)
+        {
+            return dataContext.Messages.Where(p => p.ClassId.Equals(classId)).ToList();
+        }
         
         public void Delete(int id)
         {
@@ -34,6 +39,15 @@ namespace TrungTamAnhNgu.Models
         {
             dataContext.Messages.Remove(message);
             dataContext.SaveChanges();
+        }
+
+        public void DeleteMessagesOfClass(string classId)
+        {
+            List<Message> messages = GetMessagesOfClass(classId);
+            foreach(Message message in messages)
+            {
+                Delete(message);
+            }
         }
 
         public void Update(Message message)

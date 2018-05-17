@@ -7,7 +7,7 @@ using TrungTamAnhNgu.Models;
 
 namespace TrungTamAnhNgu.Controllers
 {
-    public class StudentController : Controller
+    public class StudentController : UserController
     {
         
         public ActionResult Index()
@@ -21,16 +21,34 @@ namespace TrungTamAnhNgu.Controllers
             
         }
 
-        public ActionResult Logout()
+        public ActionResult ViewProfile()
         {
-            if (HttpContext.Request.Cookies["login"] != null)
-            {
-                HttpCookie cookie = new HttpCookie("login");
-                cookie.Expires = DateTime.Now.AddDays(-1);
-                Response.SetCookie(cookie);
-            }
-            return RedirectToAction("Index", "Home");
+            string username = HttpContext.Request.Cookies["login"]["name"];
+            StudentModel studentModel = new StudentModel();
+            ViewBag.student=studentModel.GetStudent(username);
+            return View();
         }
+
+        public ActionResult UpdateProfileHandler(FormCollection form)
+        {
+            Student student = new Student()
+            {
+                UserName = form["username"],
+                Name = form["name"],
+                Gender = form["gender"] != null,
+                Email = form["email"],
+                PhoneNumber = form["phone"],
+                Id = form["id"],
+                DayOfBirth = DateTime.Parse(form["dayOfBirth"]),
+                School = form["school"],
+                Grade = Convert.ToInt32(form["grade"])
+            };
+            StudentModel studentModel = new StudentModel();
+            studentModel.Update(student);
+            return RedirectToAction("ViewProfile");
+            
+        }
+
 
         public ActionResult RegisterInfo(string classId)
         {

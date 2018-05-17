@@ -1,7 +1,7 @@
 ﻿@using TrungTamAnhNgu.Models
 @{
     Teacher teacher = ViewBag.teacher;
-    string dayOfBirth=((DateTime)teacher.DayOfBirth).ToString("yyyy-MM-dd");
+    string dayOfBirth = ((DateTime)teacher.DayOfBirth).ToString("yyyy-MM-dd");
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -17,21 +17,20 @@
 
 <body class="fix-header fix-sidebar">
 
-    
+
     <div id="main-wrapper">
         @Html.Partial("~/Views/Shared/_Header.cshtml")
-        @Html.Partial("~/Views/Shared/_AdminLeftBar.cshtml")
 
-        <div class="page-wrapper">
+        <div class="page-wrapper"  style="margin-left:0px">
 
             <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="row justify-content-center">
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-validation">
-                                    <form class="form-valide" id="formAddUser" action="/Admin/UpdateTeacherHandler" onsubmit="return validate()" method="post">
+                                    <form class="form-valide" id="formAddUser" action="/Teacher/UpdateProfileHandler" onsubmit="return validate()" method="post">
 
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label">Username <span class="text-danger">*</span></label>
@@ -42,7 +41,6 @@
                                             <div class="text-danger" id="usernameWarning"> </div>
                                         </div>
 
-                                        
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label">Tên <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
@@ -87,7 +85,7 @@
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label">Email <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" name="email"  value="@teacher.Email">
+                                                <input type="text" class="form-control" name="email" value="@teacher.Email">
                                             </div>
                                             <br>
                                             <div class="text-danger" id="emailWarning"> </div>
@@ -136,4 +134,5 @@
 </body>
 
 </html>
+
 

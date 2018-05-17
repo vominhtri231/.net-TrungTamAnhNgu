@@ -43,8 +43,10 @@ namespace TrungTamAnhNgu.Models
         {
             MistakeModel mistakeModel = new MistakeModel();
             HomeworkModel homeworkModel = new HomeworkModel();
+            RequestModel requestModel = new RequestModel();
             mistakeModel.DeleteMadeMistakeOfRegister(register.StudentUsername, register.ClassId);
             homeworkModel.DeleteHomeWorkOfRegister(register.StudentUsername, register.ClassId);
+            requestModel.DeleteRequestOfRegister(register.StudentUsername, register.ClassId);
             this.dataContext.Registers.Remove(register);
             this.dataContext.SaveChanges();
         }

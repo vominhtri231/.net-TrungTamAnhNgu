@@ -36,6 +36,8 @@ namespace TrungTamAnhNgu.Models
             registerModel.DeleteRegisterOfClass(id);
             LessonModel lessonModel = new LessonModel();
             lessonModel.DeleteLessonOfClass(id);
+            MessageModel messageModel = new MessageModel();
+            messageModel.DeleteMessagesOfClass(id);
             Class c = GetClass(id);
             this.dataContext.Classes.Remove(c);
             this.dataContext.SaveChanges();

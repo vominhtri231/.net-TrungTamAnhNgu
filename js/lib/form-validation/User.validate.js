@@ -9,12 +9,7 @@ function validate() {
     } else {
         document.getElementById("usernameWarning").innerHTML = "";
     }
-    if (formAdd.password.value.trim().length == 0) {
-        res = false;
-        document.getElementById("passwordWarning").innerHTML = "không được để trống";
-    } else {
-        document.getElementById("passwordWarning").innerHTML = "";
-    }
+
     if (formAdd.name.value.trim().length == 0) {
         res = false;
         document.getElementById("nameWarning").innerHTML = "không được để trống";

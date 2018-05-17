@@ -9,6 +9,7 @@ namespace TrungTamAnhNgu.Models
     {
         public void Add(Student student)
         {
+            student.Password = Common.GetMD5(student.Password);
             this.dataContext.Students.Add(student);
             this.dataContext.SaveChanges();
         }
@@ -42,5 +43,18 @@ namespace TrungTamAnhNgu.Models
             this.dataContext.SaveChanges();
         }
 
+        public void Update(Student student)
+        {
+            Student oldStudent = GetStudent(student.UserName);
+            oldStudent.Name = student.Name;
+            oldStudent.Id = student.Id;
+            oldStudent.Email = student.Email;
+            oldStudent.PhoneNumber = student.PhoneNumber;
+            oldStudent.Gender = student.Gender;
+            oldStudent.DayOfBirth = student.DayOfBirth;
+            if (student.Grade != null) oldStudent.Grade = student.Grade;
+            if (student.School != null) oldStudent.School = student.School;
+            this.dataContext.SaveChanges();
+        }
     }
 }

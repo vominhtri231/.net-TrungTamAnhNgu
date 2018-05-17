@@ -18,5 +18,23 @@ namespace TrungTamAnhNgu.Models
         {
             return dataContext.Requests.Where(p => p.ClassId.Equals(classId)).ToList();
         }
+
+        public List<Request> GetRequestsOfRegister(string username,string classId)
+        {
+            return dataContext.Requests.Where(p => p.ClassId.Equals(classId) && p.StudentUsername.Equals(username)).ToList();
+        }
+
+        public void Delete(Request request)
+        {
+            dataContext.Requests.Remove(request);
+            dataContext.SaveChanges();
+        }
+
+        public void DeleteRequestOfRegister(string username, string classId)
+        {
+            List<Request> requests = GetRequestsOfRegister(username, classId);
+            foreach (Request request in requests)
+                Delete(request);
+        }
     }
 }

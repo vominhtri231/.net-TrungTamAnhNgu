@@ -19,6 +19,7 @@ namespace TrungTamAnhNgu.Models
 
         public void Add(Teacher teacher)
         {
+            teacher.Password = Common.GetMD5(teacher.Password);
             this.dataContext.Teachers.Add(teacher);
             this.dataContext.SaveChanges();
         }
@@ -32,7 +33,6 @@ namespace TrungTamAnhNgu.Models
         public void Update(Teacher newTeacher)
         {
             Teacher teacher = GetTeacher(newTeacher.UserName);
-            teacher.Password = newTeacher.Password;
             teacher.Name = newTeacher.Name;
             teacher.Id = newTeacher.Id;
             teacher.Email = newTeacher.Email;

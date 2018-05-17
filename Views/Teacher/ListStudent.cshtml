@@ -35,7 +35,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Danh sách các học viên của lớp @c.Id - @c.Name  </h4>
-                                <a href="/Teacher/ExportListStudent">Xuất ra file exel</a>
+                                <button onclick="exportToExcel()">Xuất ra file exel</button>
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
                                         <thead>
@@ -102,6 +102,7 @@
         <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
         <script src="~/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
         <script src="~/js/lib/datatables/datatables-init.js"></script>
+        <script src="~/js/lib/export/StudentToExcel.js"></script>
     </div>
 </body>
 

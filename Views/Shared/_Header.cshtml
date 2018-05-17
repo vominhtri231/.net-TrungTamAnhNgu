@@ -21,7 +21,10 @@
                     <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello  @HttpContext.Current.Request.Cookies["login"]["name"] !</a>
                     <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                         <ul class="dropdown-user">
-                            <li><a href="#"><i class="ti-user"></i> Profile</a></li>
+                            @if (HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Student")|| HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString().Equals("Teacher"))
+                            {
+                                <li><a href="/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/ViewProfile"><i class="ti-user"></i> Profile</a></li>
+                            }
                             <li><a href= "/@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()/Logout" ><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                     </div>

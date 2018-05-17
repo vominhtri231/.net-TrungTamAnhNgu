@@ -9,23 +9,14 @@ using TrungTamAnhNgu.Models;
 
 namespace TrungTamAnhNgu.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : UserController
     {
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Logout()
-        {
-            if (HttpContext.Request.Cookies["login"] != null)
-            {
-                HttpCookie cookie = new HttpCookie("login");
-                cookie.Expires = DateTime.Now.AddDays(-1);
-                Response.SetCookie(cookie);
-            }
-            return RedirectToAction("Index", "Home");
-        }
+        
 
         private DataSet HandleExel()
         {
@@ -105,7 +96,6 @@ namespace TrungTamAnhNgu.Controllers
             Teacher teacher = new Teacher()
             {
                 UserName = form["username"],
-                Password = form["password"],
                 Name = form["name"],
                 Gender = form["gender"] != null,
                 Email = form["email"],
@@ -233,6 +223,25 @@ namespace TrungTamAnhNgu.Controllers
             StudentModel studentModel = new StudentModel();
             ViewBag.student = studentModel.GetStudent(username);
             return View();
+        }
+
+        public ActionResult UpdateStudentHandler(FormCollection form)
+        {
+            StudentModel model = new StudentModel();
+            Student teacher = new Student()
+            {
+                UserName = form["username"],
+                Name = form["name"],
+                Gender = form["gender"] != null,
+                Email = form["email"],
+                PhoneNumber = form["phone"],
+                Id = form["id"],
+                DayOfBirth = DateTime.Parse(form["dayOfBirth"]),
+                School = form["school"],
+                Grade = Convert.ToInt32(form["grade"])
+            };
+            model.Update(teacher);
+            return RedirectToAction("ListStudents");
         }
         #endregion
 

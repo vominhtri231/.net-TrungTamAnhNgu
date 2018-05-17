@@ -9,6 +9,7 @@ namespace TrungTamAnhNgu.Models
     {
         public string Login(string username,string password)
         {
+            password = Common.GetMD5(password);
             string role = null;
             if(this.dataContext.Admins.Where(p => p.UserName.Equals(username) && p.Password.Equals(password)).Count() == 1)
             {
